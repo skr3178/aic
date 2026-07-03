@@ -1,0 +1,189 @@
+<mujoco model="aic_replay">
+  <compiler meshdir="/home/skr/ws_aic/aic_local/mujoco_build/meshes" angle="radian"/>
+  <visual><global offwidth="1600" offheight="1200"/><headlight diffuse="0.5 0.5 0.5" ambient="0.4 0.4 0.4"/><quality shadowsize="4096"/></visual>
+  <asset>
+    <mesh name="enclosure_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/enclosure_visual.obj" inertia="shell"/>
+    <mesh name="light_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/light_visual.obj" inertia="shell"/>
+    <mesh name="floor_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/floor_visual.obj" inertia="shell"/>
+    <mesh name="walls_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/walls_visual.obj" inertia="shell"/>
+    <mesh name="base" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/base.obj" inertia="shell"/>
+    <mesh name="shoulder" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/shoulder.obj" inertia="shell"/>
+    <mesh name="upperarm" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/upperarm.obj" inertia="shell"/>
+    <mesh name="forearm" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/forearm.obj" inertia="shell"/>
+    <mesh name="wrist1" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/wrist1.obj" inertia="shell"/>
+    <mesh name="wrist2" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/wrist2.obj" inertia="shell"/>
+    <mesh name="wrist3" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/wrist3.obj" inertia="shell"/>
+    <mesh name="cam_mount_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/cam_mount_visual.obj" inertia="shell"/>
+    <mesh name="basler_cam_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/basler_cam_visual.obj" inertia="shell"/>
+    <mesh name="axia_ft_sensor_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/axia_ft_sensor_visual.obj" inertia="shell"/>
+    <mesh name="hande_base_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/hande_base_visual.obj" inertia="shell"/>
+    <mesh name="hande_finger_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/hande_finger_visual.obj" inertia="shell"/>
+    <mesh name="base_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/base_visual.obj" inertia="shell"/>
+    <mesh name="lc_mount_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/lc_mount_visual.obj" inertia="shell"/>
+    <mesh name="sc_mount_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/sc_mount_visual.obj" inertia="shell"/>
+    <mesh name="sfp_mount_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/sfp_mount_visual.obj" inertia="shell"/>
+    <mesh name="sc_port_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/sc_port_visual.obj" inertia="shell"/>
+    <mesh name="nic_card_mount_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/nic_card_mount_visual.obj" inertia="shell"/>
+    <mesh name="nic_card_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/nic_card_visual.obj" inertia="shell"/>
+    <mesh name="lc_plug_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/lc_plug_visual.obj" inertia="shell"/>
+    <mesh name="sc_plug_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/sc_plug_visual.obj" inertia="shell"/>
+    <mesh name="sfp_module_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/sfp_module_visual.obj" inertia="shell"/>
+    <material name="m_enclosure_visual" rgba="0.210 0.210 0.212 1"/>
+    <material name="m_light_visual" rgba="0.400 0.400 0.400 1"/>
+    <material name="m_floor_visual" rgba="0.349 0.346 0.344 1"/>
+    <material name="m_walls_visual" rgba="0.293 0.293 0.293 1"/>
+    <material name="m_base" rgba="0.250 0.280 0.320 1"/>
+    <material name="m_shoulder" rgba="0.550 0.600 0.660 1"/>
+    <material name="m_upperarm" rgba="0.600 0.640 0.700 1"/>
+    <material name="m_forearm" rgba="0.600 0.640 0.700 1"/>
+    <material name="m_wrist1" rgba="0.550 0.600 0.660 1"/>
+    <material name="m_wrist2" rgba="0.550 0.600 0.660 1"/>
+    <material name="m_wrist3" rgba="0.350 0.380 0.420 1"/>
+    <material name="m_cam_mount_visual" rgba="0.857 0.857 0.861 1"/>
+    <material name="m_basler_cam_visual" rgba="0.271 0.271 0.271 1"/>
+    <material name="m_axia_ft_sensor_visual" rgba="0.496 0.440 0.312 1"/>
+    <material name="m_hande_base_visual" rgba="0.418 0.424 0.428 1"/>
+    <material name="m_hande_finger_visual" rgba="0.800 0.800 0.800 1"/>
+    <material name="m_base_visual" rgba="0.698 0.141 0.431 1"/>
+    <material name="m_lc_mount_visual" rgba="0.033 0.033 0.031 1"/>
+    <material name="m_sc_mount_visual" rgba="0.759 0.159 0.458 1"/>
+    <material name="m_sfp_mount_visual" rgba="0.033 0.033 0.031 1"/>
+    <material name="m_sc_port_visual" rgba="0.037 0.059 0.071 1"/>
+    <material name="m_nic_card_mount_visual" rgba="0.033 0.033 0.031 1"/>
+    <material name="m_nic_card_visual" rgba="0.303 0.423 0.357 1"/>
+    <material name="m_lc_plug_visual" rgba="0.793 0.768 0.746 1"/>
+    <material name="m_sc_plug_visual" rgba="0.775 0.738 0.675 1"/>
+    <material name="m_sfp_module_visual" rgba="0.626 0.620 0.597 1"/>
+    <texture type="skybox" builtin="gradient" rgb1="0.30 0.38 0.50" rgb2="0.08 0.10 0.14" width="256" height="256"/>
+  </asset>
+  <worldbody>
+    <light pos="0.2 0.2 3.2" dir="0 0 -1" diffuse="0.6 0.6 0.6" castshadow="true"/>
+    <light pos="-0.6 0.4 2.6" dir="0.3 -0.2 -1" diffuse="0.35 0.35 0.35"/>
+    <geom type="plane" size="4 4 0.1" rgba="0.45 0.45 0.5 1"/>
+    <geom type="mesh" mesh="enclosure_visual" material="m_enclosure_visual" pos="0.00000 0.00000 0.00000" quat="1.00000 0.00000 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="light_visual" material="m_light_visual" pos="0.00000 0.00000 0.00000" quat="1.00000 0.00000 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="floor_visual" material="m_floor_visual" pos="0.00000 0.00000 0.00000" quat="1.00000 0.00000 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="walls_visual" material="m_walls_visual" pos="0.00000 0.00000 0.00000" quat="1.00000 0.00000 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="base_visual" material="m_base_visual" pos="0.16000 -0.21000 1.14000" quat="0.02079 0.00000 -0.00000 0.99978" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="lc_mount_visual" material="m_lc_mount_visual" pos="0.15359 -0.12341 1.15200" quat="0.02079 0.00000 -0.00000 0.99978" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="lc_mount_visual" material="m_lc_mount_visual" pos="0.14601 -0.30575 1.15200" quat="0.02079 0.00000 -0.00000 0.99978" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="sc_mount_visual" material="m_sc_mount_visual" pos="0.06534 -0.07970 1.15200" quat="0.02079 0.00000 -0.00000 0.99978" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="sfp_mount_visual" material="m_sfp_mount_visual" pos="0.10822 -0.13153 1.15000" quat="0.02079 0.00000 -0.00000 0.99978" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="sc_port_visual" material="m_sc_port_visual" pos="0.19174 -0.24085 1.15650" quat="-0.51440 -0.51399 0.48520 0.48558" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="nic_card_mount_visual" material="m_nic_card_mount_visual" pos="0.22929 -0.11830 1.15200" quat="0.02079 0.00000 -0.00000 0.99978" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="nic_card_visual" material="m_nic_card_visual" pos="0.23203 -0.10055 1.24190" quat="0.01471 -0.01470 -0.70667 0.70724" contype="0" conaffinity="0" group="1"/>
+    <body name="mc_tabletop" mocap="true" pos="-0.20000 0.20000 1.14000" quat="0.00030 0.00000 0.00000 -1.00000">
+      <geom type="mesh" mesh="base" material="m_base" pos="0.00000 0.00000 0.00000" quat="1.00000 0.00000 0.00000 -0.00000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_shoulder_link" mocap="true" pos="-0.20000 0.20000 1.30250" quat="0.99683 0.00000 -0.00000 -0.07952">
+      <geom type="mesh" mesh="shoulder" material="m_shoulder" pos="0.00000 0.00000 0.00000" quat="0.00000 0.00000 0.00000 1.00000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_upper_arm_link" mocap="true" pos="-0.20000 0.20000 1.30250" quat="0.51413 0.58459 0.39781 -0.48546">
+      <geom type="mesh" mesh="upperarm" material="m_upperarm" pos="0.00000 0.00000 0.13800" quat="0.50000 0.50000 -0.50000 -0.50000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_forearm_link" mocap="true" pos="-0.29016 0.21448 1.71757" quat="0.01391 -0.09835 -0.70023 0.70697">
+      <geom type="mesh" mesh="forearm" material="m_forearm" pos="0.00000 0.00000 0.00700" quat="0.50000 0.50000 -0.50000 -0.50000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_wrist_1_link" mocap="true" pos="0.07316 0.02113 1.76447" quat="0.53818 0.45866 -0.53818 0.45865">
+      <geom type="mesh" mesh="wrist1" material="m_wrist1" pos="0.00000 0.00000 -0.12700" quat="0.70711 0.70711 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_wrist_2_link" mocap="true" pos="0.17160 0.00532 1.76447" quat="0.45873 -0.45858 0.53824 -0.53811">
+      <geom type="mesh" mesh="wrist2" material="m_wrist2" pos="0.00000 0.00000 -0.09970" quat="1.00000 0.00000 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_wrist_3_link" mocap="true" pos="0.17161 0.00535 1.66487" quat="-0.00002 0.00035 -1.00000 -0.00014">
+      <geom type="mesh" mesh="wrist3" material="m_wrist3" pos="0.00000 0.00000 -0.09890" quat="0.70711 0.70711 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+      <geom type="mesh" mesh="cam_mount_visual" material="m_cam_mount_visual" pos="0.00000 0.00000 -0.02650" quat="1.00000 0.00000 -0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+      <geom type="mesh" mesh="basler_cam_visual" material="m_basler_cam_visual" pos="0.00000 -0.10770 -0.03369" quat="0.99144 -0.13053 0.00000 -0.00000" contype="0" conaffinity="0" group="1"/>
+      <geom type="mesh" mesh="axia_ft_sensor_visual" material="m_axia_ft_sensor_visual" pos="0.00000 0.00000 0.00000" quat="1.00000 0.00000 -0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+      <geom type="mesh" mesh="basler_cam_visual" material="m_basler_cam_visual" pos="-0.09326 -0.05384 -0.03369" quat="0.85862 -0.11304 0.06527 -0.49572" contype="0" conaffinity="0" group="1"/>
+      <geom type="mesh" mesh="basler_cam_visual" material="m_basler_cam_visual" pos="0.09326 -0.05384 -0.03369" quat="0.85862 -0.11304 -0.06526 0.49572" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_ati_tool_link" mocap="true" pos="0.17161 0.00536 1.64037" quat="-0.00002 0.00035 -1.00000 -0.00014">
+      <geom type="mesh" mesh="hande_base_visual" material="m_hande_base_visual" pos="0.00000 0.00000 0.00000" quat="1.00000 0.00000 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_gripper_hande_finger_link_l" mocap="true" pos="0.16453 0.00535 1.64037" quat="-0.00002 0.00035 -1.00000 -0.00014">
+      <geom type="mesh" mesh="hande_finger_visual" material="m_hande_finger_visual" pos="-0.02500 0.00000 0.00000" quat="1.00000 0.00000 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_gripper_hande_finger_link_r" mocap="true" pos="0.17869 0.00536 1.64037" quat="-0.00002 0.00035 -1.00000 -0.00014">
+      <geom type="mesh" mesh="hande_finger_visual" material="m_hande_finger_visual" pos="0.02500 0.00000 0.00000" quat="0.00001 0.00000 0.00000 1.00000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_lc_plug_link" mocap="true" pos="0.17162 0.00645 1.47238" quat="-0.01610 0.02310 -0.56990 0.82123">
+      <geom type="mesh" mesh="lc_plug_visual" material="m_lc_plug_visual" pos="0.00000 0.00000 0.00000" quat="1.00000 0.00000 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_sc_plug_link" mocap="true" pos="0.57487 0.07440 1.23418" quat="0.20581 0.56501 -0.76346 0.23566">
+      <geom type="mesh" mesh="sc_plug_visual" material="m_sc_plug_visual" pos="0.00000 0.00000 0.00000" quat="1.00000 0.00000 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_sfp_module_link" mocap="true" pos="0.17163 -0.00699 1.43640" quat="-0.02310 -0.01610 0.82123 0.56990">
+      <geom type="mesh" mesh="sfp_module_visual" material="m_sfp_module_visual" pos="0.00000 0.00000 0.00000" quat="1.00000 0.00000 0.00000 0.00000" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_cable_connection_0" mocap="true" pos="0.17162 0.02079 1.51078">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_cable_connection_1" mocap="true" pos="0.58926 0.11421 1.20399">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_cable_end_0" mocap="true" pos="0.17162 0.02079 1.51078">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_1" mocap="true" pos="0.17612 0.04364 1.50495">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_10" mocap="true" pos="0.47834 0.27471 1.37006">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_11" mocap="true" pos="0.51666 0.30269 1.36338">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_12" mocap="true" pos="0.55481 0.32757 1.34918">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_13" mocap="true" pos="0.59221 0.34396 1.32519">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_14" mocap="true" pos="0.62548 0.34631 1.29208">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_15" mocap="true" pos="0.64921 0.33148 1.25462">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_16" mocap="true" pos="0.65909 0.30126 1.22026">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_17" mocap="true" pos="0.65484 0.26152 1.19537">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_18" mocap="true" pos="0.64017 0.21824 1.18272">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_19" mocap="true" pos="0.62000 0.17518 1.18277">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_2" mocap="true" pos="0.18815 0.08448 1.48515">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_20" mocap="true" pos="0.59920 0.13412 1.19498">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_3" mocap="true" pos="0.20803 0.11598 1.45565">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_4" mocap="true" pos="0.23680 0.14025 1.42632">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_5" mocap="true" pos="0.27273 0.16059 1.40232">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_6" mocap="true" pos="0.31336 0.17975 1.38600">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_7" mocap="true" pos="0.35589 0.19988 1.37723">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_8" mocap="true" pos="0.39814 0.22228 1.37384">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+    <body name="mc_link_9" mocap="true" pos="0.43902 0.24736 1.37252">
+      <geom type="sphere" size="0.007" rgba="0.95 0.55 0.1 1" contype="0" conaffinity="0" group="1"/>
+    </body>
+  </worldbody>
+</mujoco>

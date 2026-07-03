@@ -1,0 +1,46 @@
+<mujoco model="aic_static">
+  <compiler meshdir="/home/skr/ws_aic/aic_local/mujoco_build/meshes" angle="radian"/>
+  <visual><global offwidth="1600" offheight="1200"/><headlight diffuse="0.6 0.6 0.6"/></visual>
+  <asset>
+    <mesh name="enclosure_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/enclosure_visual.obj" inertia="shell"/>
+    <mesh name="light_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/light_visual.obj" inertia="shell"/>
+    <mesh name="floor_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/floor_visual.obj" inertia="shell"/>
+    <mesh name="walls_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/walls_visual.obj" inertia="shell"/>
+    <mesh name="base" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/base.obj" inertia="shell"/>
+    <mesh name="shoulder" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/shoulder.obj" inertia="shell"/>
+    <mesh name="upperarm" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/upperarm.obj" inertia="shell"/>
+    <mesh name="forearm" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/forearm.obj" inertia="shell"/>
+    <mesh name="wrist1" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/wrist1.obj" inertia="shell"/>
+    <mesh name="wrist2" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/wrist2.obj" inertia="shell"/>
+    <mesh name="wrist3" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/wrist3.obj" inertia="shell"/>
+    <mesh name="cam_mount_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/cam_mount_visual.obj" inertia="shell"/>
+    <mesh name="basler_cam_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/basler_cam_visual.obj" inertia="shell"/>
+    <mesh name="axia_ft_sensor_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/axia_ft_sensor_visual.obj" inertia="shell"/>
+    <mesh name="hande_base_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/hande_base_visual.obj" inertia="shell"/>
+    <mesh name="hande_finger_visual" file="/home/skr/ws_aic/aic_local/mujoco_build/meshes/hande_finger_visual.obj" inertia="shell"/>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.4 0.55" rgb2="0.1 0.12 0.16" width="256" height="256"/>
+  </asset>
+  <worldbody>
+    <light pos="0 0 4" dir="0 0 -1" diffuse="0.8 0.8 0.8"/>
+    <geom type="plane" size="3 3 0.1" rgba="0.5 0.5 0.55 1"/>
+    <geom type="mesh" mesh="enclosure_visual" pos="0.000000 0.000000 0.000000" quat="1.000000 0.000000 0.000000 0.000000" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="light_visual" pos="0.000000 0.000000 0.000000" quat="1.000000 0.000000 0.000000 0.000000" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="floor_visual" pos="0.000000 0.000000 0.000000" quat="1.000000 0.000000 0.000000 0.000000" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="walls_visual" pos="0.000000 0.000000 0.000000" quat="1.000000 0.000000 0.000000 0.000000" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="base" pos="-0.200000 0.200000 1.140000" quat="0.000296 0.000000 0.000000 -1.000000" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="shoulder" pos="-0.200000 0.200000 1.302500" quat="0.079468 -0.000000 -0.000000 0.996837" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="upperarm" pos="-0.221864 0.063743 1.302500" quat="-0.079002 0.107753 -0.008590 -0.990997" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="forearm" pos="-0.291298 0.207560 1.717568" quat="0.059526 0.660405 -0.052647 0.746692" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="wrist1" pos="0.093158 0.146579 1.765490" quat="0.056194 0.704838 -0.056189 0.704904" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="wrist2" pos="0.073037 0.021183 1.765489" quat="0.458761 -0.458610 0.538173 -0.538132" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="wrist3" pos="0.171478 0.005388 1.764799" quat="-0.000287 0.000200 -0.707172 0.707042" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="cam_mount_visual" pos="0.171487 0.005401 1.692399" quat="-0.000062 0.000344 -1.000000 -0.000092" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="basler_cam_visual" pos="0.171561 -0.102300 1.699569" quat="-0.000015 0.000350 -0.991433 -0.130619" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="axia_ft_sensor_visual" pos="0.171491 0.005406 1.665899" quat="-0.000062 0.000344 -1.000000 -0.000092" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="basler_cam_visual" pos="0.264783 -0.048379 1.699588" quat="0.065206 0.496031 -0.858439 -0.113065" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="basler_cam_visual" pos="0.078264 -0.048507 1.699565" quat="-0.065232 -0.495425 -0.858773 -0.113174" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="hande_base_visual" pos="0.171494 0.005411 1.641399" quat="-0.000062 0.000344 -1.000000 -0.000092" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="hande_finger_visual" pos="0.189413 0.005423 1.641401" quat="-0.000062 0.000344 -1.000000 -0.000092" contype="0" conaffinity="0" group="1"/>
+    <geom type="mesh" mesh="hande_finger_visual" pos="0.153244 0.005398 1.641397" quat="0.000092 -1.000000 -0.000356 -0.000062" contype="0" conaffinity="0" group="1"/>
+  </worldbody>
+</mujoco>

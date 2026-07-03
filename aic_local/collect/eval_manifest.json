@@ -1,0 +1,71 @@
+[
+  {
+    "episode": 0,
+    "chunk": 0,
+    "trial": "trial_1",
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_2",
+    "port_frame": "task_board/nic_card_mount_2/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_2/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.16,
+        "y": -0.21,
+        "z": 1.14,
+        "roll": 0.0,
+        "pitch": 0.0,
+        "yaw": 3.1
+      }
+    }
+  },
+  {
+    "episode": 1,
+    "chunk": 0,
+    "trial": "trial_2",
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_4",
+    "port_frame": "task_board/nic_card_mount_4/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_4/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.16,
+        "y": 0.05,
+        "z": 1.14,
+        "roll": 0.0,
+        "pitch": 0.0,
+        "yaw": -3.1
+      }
+    }
+  },
+  {
+    "episode": 2,
+    "chunk": 0,
+    "trial": "trial_3",
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.2,
+        "y": -0.15,
+        "z": 1.14,
+        "roll": 0.0,
+        "pitch": 0.0,
+        "yaw": -1.8
+      }
+    }
+  }
+]

@@ -1,0 +1,1602 @@
+[
+  {
+    "episode": 0,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.16185,
+        "y": -0.20801,
+        "yaw": 3.20076
+      },
+      "target_translation": 0.04827,
+      "target_yaw": 0.10333,
+      "grasp_offset": {
+        "x": 0.004127,
+        "y": 0.014114,
+        "z": 0.038593
+      },
+      "grasp_rpy": {
+        "roll": 0.58626,
+        "pitch": -0.3593,
+        "yaw": 1.28297
+      }
+    },
+    "chunk": 0,
+    "trial": "trial_1"
+  },
+  {
+    "episode": 1,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.18127,
+        "y": 0.00322,
+        "yaw": 2.89059
+      },
+      "target_translation": -0.05348,
+      "target_yaw": -0.10969,
+      "grasp_offset": {
+        "x": 0.005559,
+        "y": 0.019605,
+        "z": 0.036531
+      },
+      "grasp_rpy": {
+        "roll": 0.49844,
+        "pitch": -0.50514,
+        "yaw": 1.35186
+      }
+    },
+    "chunk": 0,
+    "trial": "trial_2"
+  },
+  {
+    "episode": 2,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.16556,
+        "y": -0.18206,
+        "yaw": 3.09542
+      },
+      "target_translation": 0.02157,
+      "target_yaw": 0.13681,
+      "grasp_offset": {
+        "x": 0.007165,
+        "y": 0.00829,
+        "z": 0.035808
+      },
+      "grasp_rpy": {
+        "roll": 0.30466,
+        "pitch": -0.63255,
+        "yaw": 1.39072
+      }
+    },
+    "chunk": 0,
+    "trial": "trial_3"
+  },
+  {
+    "episode": 3,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.14242,
+        "y": 0.02835,
+        "yaw": 3.13358
+      },
+      "target_translation": -0.07782,
+      "target_yaw": -0.07861,
+      "grasp_offset": {
+        "x": 0.000708,
+        "y": 0.013304,
+        "z": 0.042113
+      },
+      "grasp_rpy": {
+        "roll": 0.35697,
+        "pitch": -0.54276,
+        "yaw": 1.47041
+      }
+    },
+    "chunk": 0,
+    "trial": "trial_4"
+  },
+  {
+    "episode": 4,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.12253,
+        "y": -0.22285,
+        "yaw": 3.25373
+      },
+      "target_translation": 0.04737,
+      "target_yaw": -0.07919,
+      "grasp_offset": {
+        "x": -0.006349,
+        "y": 0.013722,
+        "z": 0.03693
+      },
+      "grasp_rpy": {
+        "roll": 0.30634,
+        "pitch": -0.53441,
+        "yaw": 1.45584
+      }
+    },
+    "chunk": 0,
+    "trial": "trial_5"
+  },
+  {
+    "episode": 5,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.16098,
+        "y": -0.01409,
+        "yaw": 3.1499
+      },
+      "target_translation": -0.03572,
+      "target_yaw": 0.03687,
+      "grasp_offset": {
+        "x": 0.003869,
+        "y": 0.020108,
+        "z": 0.047529
+      },
+      "grasp_rpy": {
+        "roll": 0.34972,
+        "pitch": -0.3915,
+        "yaw": 1.20014
+      }
+    },
+    "chunk": 0,
+    "trial": "trial_6"
+  },
+  {
+    "episode": 6,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.12231,
+        "y": -0.22219,
+        "yaw": 3.26328
+      },
+      "target_translation": 0.02604,
+      "target_yaw": 0.088,
+      "grasp_offset": {
+        "x": 0.005151,
+        "y": 0.015146,
+        "z": 0.038636
+      },
+      "grasp_rpy": {
+        "roll": 0.55261,
+        "pitch": -0.59968,
+        "yaw": 1.19337
+      }
+    },
+    "chunk": 0,
+    "trial": "trial_7"
+  },
+  {
+    "episode": 7,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.17527,
+        "y": -0.01276,
+        "yaw": 3.13053
+      },
+      "target_translation": -0.02776,
+      "target_yaw": -0.05285,
+      "grasp_offset": {
+        "x": -0.005586,
+        "y": 0.0178,
+        "z": 0.033609
+      },
+      "grasp_rpy": {
+        "roll": 0.30482,
+        "pitch": -0.61498,
+        "yaw": 1.46418
+      }
+    },
+    "chunk": 0,
+    "trial": "trial_8"
+  },
+  {
+    "episode": 8,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.12597,
+        "y": -0.21832,
+        "yaw": 3.00812
+      },
+      "target_translation": 0.02255,
+      "target_yaw": -0.08199,
+      "grasp_offset": {
+        "x": 0.007397,
+        "y": 0.009406,
+        "z": 0.045727
+      },
+      "grasp_rpy": {
+        "roll": 0.41213,
+        "pitch": -0.37037,
+        "yaw": 1.36901
+      }
+    },
+    "chunk": 0,
+    "trial": "trial_9"
+  },
+  {
+    "episode": 9,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.14134,
+        "y": -0.02518,
+        "yaw": 2.93073
+      },
+      "target_translation": -0.07524,
+      "target_yaw": -0.0111,
+      "grasp_offset": {
+        "x": -0.002027,
+        "y": 0.009602,
+        "z": 0.046315
+      },
+      "grasp_rpy": {
+        "roll": 0.54506,
+        "pitch": -0.35267,
+        "yaw": 1.19378
+      }
+    },
+    "chunk": 0,
+    "trial": "trial_10"
+  },
+  {
+    "episode": 10,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.13092,
+        "y": -0.17355,
+        "yaw": 2.9968
+      },
+      "target_translation": 0.04288,
+      "target_yaw": 0.02142,
+      "grasp_offset": {
+        "x": -0.001138,
+        "y": 0.016634,
+        "z": 0.037748
+      },
+      "grasp_rpy": {
+        "roll": 0.56625,
+        "pitch": -0.56935,
+        "yaw": 1.40228
+      }
+    },
+    "chunk": 1,
+    "trial": "trial_1"
+  },
+  {
+    "episode": 11,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.16905,
+        "y": -0.02209,
+        "yaw": 3.1388
+      },
+      "target_translation": -0.08439,
+      "target_yaw": -0.01429,
+      "grasp_offset": {
+        "x": 0.000956,
+        "y": 0.022172,
+        "z": 0.0399
+      },
+      "grasp_rpy": {
+        "roll": 0.52266,
+        "pitch": -0.39441,
+        "yaw": 1.42738
+      }
+    },
+    "chunk": 1,
+    "trial": "trial_2"
+  },
+  {
+    "episode": 12,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.17763,
+        "y": -0.22877,
+        "yaw": 3.13844
+      },
+      "target_translation": 0.02937,
+      "target_yaw": -0.00763,
+      "grasp_offset": {
+        "x": 0.00252,
+        "y": 0.018048,
+        "z": 0.036732
+      },
+      "grasp_rpy": {
+        "roll": 0.58006,
+        "pitch": -0.61102,
+        "yaw": 1.41197
+      }
+    },
+    "chunk": 1,
+    "trial": "trial_3"
+  },
+  {
+    "episode": 13,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.19288,
+        "y": 0.02921,
+        "yaw": 3.03799
+      },
+      "target_translation": -0.07315,
+      "target_yaw": -0.0723,
+      "grasp_offset": {
+        "x": 0.002964,
+        "y": 0.01833,
+        "z": 0.046039
+      },
+      "grasp_rpy": {
+        "roll": 0.31913,
+        "pitch": -0.37503,
+        "yaw": 1.19107
+      }
+    },
+    "chunk": 1,
+    "trial": "trial_4"
+  },
+  {
+    "episode": 14,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.17253,
+        "y": -0.19537,
+        "yaw": 3.26429
+      },
+      "target_translation": 0.02852,
+      "target_yaw": -0.11795,
+      "grasp_offset": {
+        "x": 0.003241,
+        "y": 0.017818,
+        "z": 0.049496
+      },
+      "grasp_rpy": {
+        "roll": 0.30989,
+        "pitch": -0.34387,
+        "yaw": 1.18906
+      }
+    },
+    "chunk": 1,
+    "trial": "trial_5"
+  },
+  {
+    "episode": 15,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.1409,
+        "y": 0.0268,
+        "yaw": 3.04226
+      },
+      "target_translation": -0.03688,
+      "target_yaw": 0.13957,
+      "grasp_offset": {
+        "x": -0.007814,
+        "y": 0.019161,
+        "z": 0.034978
+      },
+      "grasp_rpy": {
+        "roll": 0.583,
+        "pitch": -0.42799,
+        "yaw": 1.47325
+      }
+    },
+    "chunk": 1,
+    "trial": "trial_6"
+  },
+  {
+    "episode": 16,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.16808,
+        "y": -0.22644,
+        "yaw": 2.99514
+      },
+      "target_translation": 0.04662,
+      "target_yaw": -0.04154,
+      "grasp_offset": {
+        "x": -0.000312,
+        "y": 0.014056,
+        "z": 0.041598
+      },
+      "grasp_rpy": {
+        "roll": 0.29525,
+        "pitch": -0.50661,
+        "yaw": 1.3973
+      }
+    },
+    "chunk": 1,
+    "trial": "trial_7"
+  },
+  {
+    "episode": 17,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.18236,
+        "y": 0.01858,
+        "yaw": 3.13226
+      },
+      "target_translation": -0.02756,
+      "target_yaw": 0.0066,
+      "grasp_offset": {
+        "x": 0.004907,
+        "y": 0.022753,
+        "z": 0.037084
+      },
+      "grasp_rpy": {
+        "roll": 0.56799,
+        "pitch": -0.55902,
+        "yaw": 1.19868
+      }
+    },
+    "chunk": 1,
+    "trial": "trial_8"
+  },
+  {
+    "episode": 18,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.12563,
+        "y": -0.18234,
+        "yaw": 3.2507
+      },
+      "target_translation": 0.02263,
+      "target_yaw": -0.09562,
+      "grasp_offset": {
+        "x": 0.002583,
+        "y": 0.012738,
+        "z": 0.037617
+      },
+      "grasp_rpy": {
+        "roll": 0.51571,
+        "pitch": -0.48663,
+        "yaw": 1.44174
+      }
+    },
+    "chunk": 1,
+    "trial": "trial_9"
+  },
+  {
+    "episode": 19,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.16436,
+        "y": -0.02861,
+        "yaw": 2.98822
+      },
+      "target_translation": -0.0698,
+      "target_yaw": 0.05314,
+      "grasp_offset": {
+        "x": 0.004559,
+        "y": 0.015712,
+        "z": 0.040634
+      },
+      "grasp_rpy": {
+        "roll": 0.30957,
+        "pitch": -0.61224,
+        "yaw": 1.18874
+      }
+    },
+    "chunk": 1,
+    "trial": "trial_10"
+  },
+  {
+    "episode": 20,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.12166,
+        "y": -0.20292,
+        "yaw": 3.06375
+      },
+      "target_translation": 0.04751,
+      "target_yaw": 0.12169,
+      "grasp_offset": {
+        "x": 0.00298,
+        "y": 0.019649,
+        "z": 0.048924
+      },
+      "grasp_rpy": {
+        "roll": 0.30529,
+        "pitch": -0.54868,
+        "yaw": 1.20527
+      }
+    },
+    "chunk": 2,
+    "trial": "trial_1"
+  },
+  {
+    "episode": 21,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.19743,
+        "y": -0.02531,
+        "yaw": 3.02816
+      },
+      "target_translation": -0.07532,
+      "target_yaw": -0.10052,
+      "grasp_offset": {
+        "x": 0.003036,
+        "y": 0.017545,
+        "z": 0.040116
+      },
+      "grasp_rpy": {
+        "roll": 0.2938,
+        "pitch": -0.34525,
+        "yaw": 1.35694
+      }
+    },
+    "chunk": 2,
+    "trial": "trial_2"
+  },
+  {
+    "episode": 22,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.17476,
+        "y": -0.17304,
+        "yaw": 3.11932
+      },
+      "target_translation": 0.04652,
+      "target_yaw": 0.13746,
+      "grasp_offset": {
+        "x": -0.005754,
+        "y": 0.007763,
+        "z": 0.050428
+      },
+      "grasp_rpy": {
+        "roll": 0.44043,
+        "pitch": -0.55908,
+        "yaw": 1.21943
+      }
+    },
+    "chunk": 2,
+    "trial": "trial_3"
+  },
+  {
+    "episode": 23,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.1421,
+        "y": 0.00374,
+        "yaw": 2.88754
+      },
+      "target_translation": -0.03879,
+      "target_yaw": 0.12746,
+      "grasp_offset": {
+        "x": 0.007178,
+        "y": 0.021664,
+        "z": 0.033787
+      },
+      "grasp_rpy": {
+        "roll": 0.29503,
+        "pitch": -0.53386,
+        "yaw": 1.42698
+      }
+    },
+    "chunk": 2,
+    "trial": "trial_4"
+  },
+  {
+    "episode": 24,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.12114,
+        "y": -0.22705,
+        "yaw": 3.05926
+      },
+      "target_translation": 0.04541,
+      "target_yaw": 0.0637,
+      "grasp_offset": {
+        "x": 0.005437,
+        "y": 0.010306,
+        "z": 0.050423
+      },
+      "grasp_rpy": {
+        "roll": 0.52604,
+        "pitch": -0.47237,
+        "yaw": 1.48011
+      }
+    },
+    "chunk": 2,
+    "trial": "trial_5"
+  },
+  {
+    "episode": 25,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.17298,
+        "y": 0.02889,
+        "yaw": 3.04423
+      },
+      "target_translation": -0.04041,
+      "target_yaw": -0.03691,
+      "grasp_offset": {
+        "x": 0.006829,
+        "y": 0.02088,
+        "z": 0.035875
+      },
+      "grasp_rpy": {
+        "roll": 0.29425,
+        "pitch": -0.59158,
+        "yaw": 1.26075
+      }
+    },
+    "chunk": 2,
+    "trial": "trial_6"
+  },
+  {
+    "episode": 26,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.17683,
+        "y": -0.1885,
+        "yaw": 3.02482
+      },
+      "target_translation": 0.02326,
+      "target_yaw": 0.07419,
+      "grasp_offset": {
+        "x": -0.004756,
+        "y": 0.010668,
+        "z": 0.044062
+      },
+      "grasp_rpy": {
+        "roll": 0.53427,
+        "pitch": -0.43348,
+        "yaw": 1.39696
+      }
+    },
+    "chunk": 2,
+    "trial": "trial_7"
+  },
+  {
+    "episode": 27,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.19005,
+        "y": -0.0181,
+        "yaw": 3.06899
+      },
+      "target_translation": -0.02528,
+      "target_yaw": 0.04455,
+      "grasp_offset": {
+        "x": 0.003222,
+        "y": 0.022698,
+        "z": 0.035592
+      },
+      "grasp_rpy": {
+        "roll": 0.53812,
+        "pitch": -0.38863,
+        "yaw": 1.43102
+      }
+    },
+    "chunk": 2,
+    "trial": "trial_8"
+  },
+  {
+    "episode": 28,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.14109,
+        "y": -0.17002,
+        "yaw": 3.23793
+      },
+      "target_translation": 0.04192,
+      "target_yaw": -0.11611,
+      "grasp_offset": {
+        "x": -0.005906,
+        "y": 0.016941,
+        "z": 0.037299
+      },
+      "grasp_rpy": {
+        "roll": 0.29858,
+        "pitch": -0.39982,
+        "yaw": 1.35688
+      }
+    },
+    "chunk": 2,
+    "trial": "trial_9"
+  },
+  {
+    "episode": 29,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.18757,
+        "y": 0.02817,
+        "yaw": 3.12081
+      },
+      "target_translation": -0.05906,
+      "target_yaw": 0.01444,
+      "grasp_offset": {
+        "x": -0.002467,
+        "y": 0.020903,
+        "z": 0.037068
+      },
+      "grasp_rpy": {
+        "roll": 0.52075,
+        "pitch": -0.59217,
+        "yaw": 1.43649
+      }
+    },
+    "chunk": 2,
+    "trial": "trial_10"
+  },
+  {
+    "episode": 30,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.12315,
+        "y": -0.18135,
+        "yaw": 3.27317
+      },
+      "target_translation": 0.04968,
+      "target_yaw": 0.01172,
+      "grasp_offset": {
+        "x": -0.003373,
+        "y": 0.007866,
+        "z": 0.044908
+      },
+      "grasp_rpy": {
+        "roll": 0.56824,
+        "pitch": -0.57058,
+        "yaw": 1.34389
+      }
+    },
+    "chunk": 3,
+    "trial": "trial_1"
+  },
+  {
+    "episode": 31,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.14493,
+        "y": -0.02801,
+        "yaw": 2.98345
+      },
+      "target_translation": -0.08146,
+      "target_yaw": -0.14632,
+      "grasp_offset": {
+        "x": -0.006202,
+        "y": 0.01367,
+        "z": 0.043392
+      },
+      "grasp_rpy": {
+        "roll": 0.5605,
+        "pitch": -0.61677,
+        "yaw": 1.28422
+      }
+    },
+    "chunk": 3,
+    "trial": "trial_2"
+  },
+  {
+    "episode": 32,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.17703,
+        "y": -0.22664,
+        "yaw": 3.24169
+      },
+      "target_translation": 0.02135,
+      "target_yaw": -0.12677,
+      "grasp_offset": {
+        "x": -0.004582,
+        "y": 0.012235,
+        "z": 0.048853
+      },
+      "grasp_rpy": {
+        "roll": 0.41619,
+        "pitch": -0.35854,
+        "yaw": 1.38834
+      }
+    },
+    "chunk": 3,
+    "trial": "trial_3"
+  },
+  {
+    "episode": 33,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.14813,
+        "y": 0.02451,
+        "yaw": 2.91511
+      },
+      "target_translation": -0.08498,
+      "target_yaw": 0.0211,
+      "grasp_offset": {
+        "x": 0.002116,
+        "y": 0.020457,
+        "z": 0.036887
+      },
+      "grasp_rpy": {
+        "roll": 0.41377,
+        "pitch": -0.35734,
+        "yaw": 1.18121
+      }
+    },
+    "chunk": 3,
+    "trial": "trial_4"
+  },
+  {
+    "episode": 34,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.14361,
+        "y": -0.18931,
+        "yaw": 3.05623
+      },
+      "target_translation": 0.02352,
+      "target_yaw": 0.00868,
+      "grasp_offset": {
+        "x": 0.001372,
+        "y": 0.020878,
+        "z": 0.048828
+      },
+      "grasp_rpy": {
+        "roll": 0.46567,
+        "pitch": -0.48493,
+        "yaw": 1.18455
+      }
+    },
+    "chunk": 3,
+    "trial": "trial_5"
+  },
+  {
+    "episode": 35,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.19141,
+        "y": -0.01951,
+        "yaw": 3.0854
+      },
+      "target_translation": -0.06745,
+      "target_yaw": 0.01461,
+      "grasp_offset": {
+        "x": 0.004009,
+        "y": 0.019342,
+        "z": 0.046291
+      },
+      "grasp_rpy": {
+        "roll": 0.56261,
+        "pitch": -0.48296,
+        "yaw": 1.21451
+      }
+    },
+    "chunk": 3,
+    "trial": "trial_6"
+  },
+  {
+    "episode": 36,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.14736,
+        "y": -0.22767,
+        "yaw": 3.23132
+      },
+      "target_translation": 0.03601,
+      "target_yaw": -0.05139,
+      "grasp_offset": {
+        "x": 0.007731,
+        "y": 0.022733,
+        "z": 0.049143
+      },
+      "grasp_rpy": {
+        "roll": 0.32415,
+        "pitch": -0.62642,
+        "yaw": 1.18112
+      }
+    },
+    "chunk": 3,
+    "trial": "trial_7"
+  },
+  {
+    "episode": 37,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.14505,
+        "y": -0.02451,
+        "yaw": 2.86929
+      },
+      "target_translation": -0.04909,
+      "target_yaw": 0.0546,
+      "grasp_offset": {
+        "x": -0.006534,
+        "y": 0.01727,
+        "z": 0.045921
+      },
+      "grasp_rpy": {
+        "roll": 0.54967,
+        "pitch": -0.45648,
+        "yaw": 1.47105
+      }
+    },
+    "chunk": 3,
+    "trial": "trial_8"
+  },
+  {
+    "episode": 38,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.12618,
+        "y": -0.22626,
+        "yaw": 3.10381
+      },
+      "target_translation": 0.03528,
+      "target_yaw": 0.04184,
+      "grasp_offset": {
+        "x": -0.001136,
+        "y": 0.018974,
+        "z": 0.03551
+      },
+      "grasp_rpy": {
+        "roll": 0.54026,
+        "pitch": -0.35867,
+        "yaw": 1.18186
+      }
+    },
+    "chunk": 3,
+    "trial": "trial_9"
+  },
+  {
+    "episode": 39,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.15447,
+        "y": -0.00063,
+        "yaw": 3.13867
+      },
+      "target_translation": -0.04449,
+      "target_yaw": -0.08704,
+      "grasp_offset": {
+        "x": -0.001834,
+        "y": 0.010506,
+        "z": 0.03878
+      },
+      "grasp_rpy": {
+        "roll": 0.32363,
+        "pitch": -0.36664,
+        "yaw": 1.44831
+      }
+    },
+    "chunk": 3,
+    "trial": "trial_10"
+  },
+  {
+    "episode": 40,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.1306,
+        "y": -0.22229,
+        "yaw": 3.2855
+      },
+      "target_translation": 0.03479,
+      "target_yaw": -0.01242,
+      "grasp_offset": {
+        "x": 0.006046,
+        "y": 0.007895,
+        "z": 0.038969
+      },
+      "grasp_rpy": {
+        "roll": 0.35662,
+        "pitch": -0.39445,
+        "yaw": 1.25221
+      }
+    },
+    "chunk": 4,
+    "trial": "trial_1"
+  },
+  {
+    "episode": 41,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.14974,
+        "y": -0.02353,
+        "yaw": 3.10408
+      },
+      "target_translation": -0.02655,
+      "target_yaw": -0.03569,
+      "grasp_offset": {
+        "x": -0.004308,
+        "y": 0.010042,
+        "z": 0.047071
+      },
+      "grasp_rpy": {
+        "roll": 0.59201,
+        "pitch": -0.42254,
+        "yaw": 1.28105
+      }
+    },
+    "chunk": 4,
+    "trial": "trial_2"
+  },
+  {
+    "episode": 42,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.14012,
+        "y": -0.22472,
+        "yaw": 3.0687
+      },
+      "target_translation": 0.02883,
+      "target_yaw": 0.04183,
+      "grasp_offset": {
+        "x": -0.0076,
+        "y": 0.011785,
+        "z": 0.038021
+      },
+      "grasp_rpy": {
+        "roll": 0.40706,
+        "pitch": -0.61492,
+        "yaw": 1.40737
+      }
+    },
+    "chunk": 4,
+    "trial": "trial_3"
+  },
+  {
+    "episode": 43,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.15695,
+        "y": 0.02063,
+        "yaw": 2.9467
+      },
+      "target_translation": -0.08131,
+      "target_yaw": -0.13843,
+      "grasp_offset": {
+        "x": 0.00314,
+        "y": 0.009688,
+        "z": 0.039851
+      },
+      "grasp_rpy": {
+        "roll": 0.55475,
+        "pitch": -0.40124,
+        "yaw": 1.46845
+      }
+    },
+    "chunk": 4,
+    "trial": "trial_4"
+  },
+  {
+    "episode": 44,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.17142,
+        "y": -0.19141,
+        "yaw": 3.23505
+      },
+      "target_translation": 0.03992,
+      "target_yaw": -0.02744,
+      "grasp_offset": {
+        "x": 0.000672,
+        "y": 0.021178,
+        "z": 0.037277
+      },
+      "grasp_rpy": {
+        "roll": 0.55504,
+        "pitch": -0.50155,
+        "yaw": 1.45825
+      }
+    },
+    "chunk": 4,
+    "trial": "trial_5"
+  },
+  {
+    "episode": 45,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.1734,
+        "y": -0.02948,
+        "yaw": 2.86851
+      },
+      "target_translation": -0.07202,
+      "target_yaw": -0.06844,
+      "grasp_offset": {
+        "x": -0.000192,
+        "y": 0.008695,
+        "z": 0.03787
+      },
+      "grasp_rpy": {
+        "roll": 0.50807,
+        "pitch": -0.63138,
+        "yaw": 1.46792
+      }
+    },
+    "chunk": 4,
+    "trial": "trial_6"
+  },
+  {
+    "episode": 46,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_1",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_1_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_1_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.1781,
+        "y": -0.21006,
+        "yaw": 3.0244
+      },
+      "target_translation": 0.03068,
+      "target_yaw": 0.11648,
+      "grasp_offset": {
+        "x": -0.0016,
+        "y": 0.016803,
+        "z": 0.048207
+      },
+      "grasp_rpy": {
+        "roll": 0.3283,
+        "pitch": -0.5083,
+        "yaw": 1.21328
+      }
+    },
+    "chunk": 4,
+    "trial": "trial_7"
+  },
+  {
+    "episode": 47,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.18955,
+        "y": 0.02959,
+        "yaw": 3.11
+      },
+      "target_translation": -0.08291,
+      "target_yaw": -0.04445,
+      "grasp_offset": {
+        "x": -0.001117,
+        "y": 0.014644,
+        "z": 0.037946
+      },
+      "grasp_rpy": {
+        "roll": 0.39778,
+        "pitch": -0.59392,
+        "yaw": 1.24403
+      }
+    },
+    "chunk": 4,
+    "trial": "trial_8"
+  },
+  {
+    "episode": 48,
+    "type": "sfp",
+    "cable_name": "cable_0",
+    "plug_name": "sfp_tip",
+    "port_name": "sfp_port_0",
+    "target_module_name": "nic_card_mount_0",
+    "port_frame": "task_board/nic_card_mount_0/sfp_port_0_link",
+    "port_entrance_frame": "task_board/nic_card_mount_0/sfp_port_0_link_entrance",
+    "plug_frame": "cable_0/sfp_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.16631,
+        "y": -0.2039,
+        "yaw": 3.0599
+      },
+      "target_translation": 0.02621,
+      "target_yaw": 0.01445,
+      "grasp_offset": {
+        "x": -0.00589,
+        "y": 0.01877,
+        "z": 0.039286
+      },
+      "grasp_rpy": {
+        "roll": 0.33098,
+        "pitch": -0.33436,
+        "yaw": 1.46457
+      }
+    },
+    "chunk": 4,
+    "trial": "trial_9"
+  },
+  {
+    "episode": 49,
+    "type": "sc",
+    "cable_name": "cable_1",
+    "plug_name": "sc_tip",
+    "port_name": "sc_port_base",
+    "target_module_name": "sc_port_1",
+    "port_frame": "task_board/sc_port_1/sc_port_base_link",
+    "port_entrance_frame": "task_board/sc_port_1/sc_port_base_link_entrance",
+    "plug_frame": "cable_1/sc_tip_link",
+    "params": {
+      "board_pose": {
+        "x": 0.15681,
+        "y": 0.00529,
+        "yaw": 2.93355
+      },
+      "target_translation": -0.03258,
+      "target_yaw": -0.12993,
+      "grasp_offset": {
+        "x": -0.001388,
+        "y": 0.009153,
+        "z": 0.044484
+      },
+      "grasp_rpy": {
+        "roll": 0.29689,
+        "pitch": -0.35538,
+        "yaw": 1.27152
+      }
+    },
+    "chunk": 4,
+    "trial": "trial_10"
+  }
+]
