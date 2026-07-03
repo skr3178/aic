@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Run a command in a CLEAN Kilted pixi env, stripping leaked host-ROS (Humble) vars.
+# Usage: aicrun ros2 run aic_model aic_model --ros-args ...
+cd /home/skr/ws_aic/src/aic || exit 1
+exec env -u PYTHONPATH -u AMENT_PREFIX_PATH -u LD_LIBRARY_PATH -u CMAKE_PREFIX_PATH \
+  -u ROS_DISTRO -u ROS_VERSION -u ROS_PYTHON_VERSION -u AMENT_CURRENT_PREFIX \
+  -u COLCON_PREFIX_PATH -u ROS_LOCALHOST_ONLY -u ROS_AUTOMATIC_DISCOVERY_RANGE \
+  /home/skr/.pixi/bin/pixi run "$@"
