@@ -53,12 +53,27 @@ cd ~/ws_aic/aic_local/collect && python3 gen_configs.py
 
 ## Project status (milestones)
 
+> **Living stage tracker with ✅/⏳ per stage: `RUN_PLAN.md`** (kept current; this list below is the long-form history).
+
 - **M0 ✅** env: pixi + ROS 2 Kilted; torch 2.12.1+cu130 on Blackwell (sm_120); lerobot ACT imports.
 - **M1 ✅** self-scoring validated: WaveArm 37.48 (floor), CheatCode 279.37 (ceiling, inserts on all 3 trials).
 - **M2a ✅** `gen_configs.py` → 50 diverse configs + manifest (engine-parse validated).
-- **M2b ⏳** collection pipeline: `run_collection.sh` + `collector_node.py` (pair 3 wrist images ↔ ground-truth port/plug pose) + `finalize.py` (CheatCode-success acceptance filter). *Next.*
-- **M3 ⏳** train perception / ACT policy on the collected data.
-- **M4 ⏳** wrap the checkpoint as a policy; self-score with `ground_truth:=false`.
+- **M2b ✅** collection pipeline → 49 kept episodes in `perception_v1/` (`frames.parquet` = images↔GT port/plug pose, `il_frames.parquet`, `index.parquet`).
+- **M3 ✅** perception net trained: port anchor ~9 mm @ close range. `~/aic_data/m3_perception_run/best.pt`.
+- **M3.5 ✅** dual-anchor net (port **and** plug from vision; plug labels derived, no re-collection):
+  port ~9 mm / plug ~8 mm @ close range, relative plug→port ~12 mm. Details → `perception_results.md`.
+  `~/aic_data/m35_dual_run/best.pt`.
+- **M4 ✅ (first light)** `PerceptionInsert` policy wired & scored GT-free: **−37.6** (trial_1 reached
+  0.07 m → first GT-free Tier-3 proximity credit; score dominated by removable collision penalties +
+  eval-scene generalization gap on 2 trials). Policy at `aic_example_policies/.../ros/PerceptionInsert.py`
+  (also copied into the pixi site-packages — copy-install, re-copy after edits!). See `baseline_scores.md`.
+- **M5 ✅** v2 policy (force-stop + spiral search + pose logging + per-trial state reset) and GT-diagnostic
+  run: **far misses = training-coverage gap, not a frame bug** (61 mm in-range vs 335–372 mm out-of-range;
+  v1 configs never varied the target rail — all 50 eps target `nic_card_mount_0`/`sc_port_1`).
+  See `baseline_scores.md` (M5 diagnostic) and `~/aic_data/pi_pose_log.jsonl`.
+- **M6 ⏳** coverage-fix dataset `perception_v2`: 160 eps stratified over **all 5 nic rails × 2 SFP ports +
+  2 sc rails**, full published rail limits, board ±0.12 m / ±0.6 rad; retrain (optionally port-conditioned);
+  re-score. **Vaulted eval config is never read** (fair play). Full plan: `collect/M6_PLAN.md`. *Next.*
 
 ## Gotchas (learned the hard way)
 

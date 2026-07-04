@@ -19,3 +19,14 @@ aic_utils/aic_isaac/aic_isaaclab/source/aic_task/aic_task/tasks/manager_based/ai
 
 # local dataset (do not upload)
 perception_v1
+aic_results
+aic_data
+eval_scenes
+runact
+models
+perception_native
+perception_v2
+v2_videos
+m6_dual_run
+.vscode
+*.pdf
