@@ -204,3 +204,142 @@ single un-conditioned "find-a-port" keypoint with no target identity. NOT geomet
 randomization (lighting/texture) or eval-representative data to close generated→vaulted; (c) target
 conditioning + confidence/peak-sharpness gating to kill edge-garbage; (d) an eval-domain proxy set so we
 stop being fooled by v1. Judge every fix by the live eval-scene error + score, never by a generated proxy.
+
+---
+
+# M12 — Ablation study: what actually causes the eval perception gap (2026-07-05)
+
+After M11 showed perception fails on the real eval scenes (SFP 8–40 mm, SC 300–430 mm) despite the
+1.9 mm v1 proxy, we ran a systematic ablation to isolate the cause. Each hypothesis got a cheap,
+targeted test on data where the detector is known-sharp (v1) or on the eval logs directly.
+
+## The ledger
+
+| # | Hypothesis | Test | Result | Verdict |
+|---|---|---|---|---|
+| 1 | Scale / K / preprocessing bug | live image dims + corr(off-center px, 3D err) | native `[1024,1152]`; corr **0.08** | ❌ ruled out |
+| 2 | Corrupt / mis-loaded checkpoint | model prediction vs GT on the *same* episode as the label video (v2 ep0007) | **0.7 px** err, **0.2 px** frame-to-frame jitter | ❌ ruled out |
+| 3 | SC connector intrinsically hard | v1-SC baseline error | **1.8 px** (SC is *easier* than v1-SFP 5.5 px) | ❌ ruled out |
+| 4 | Photometric / lighting | brightness ×2.5, dark ×0.4, contrast washout, hue ±0.15, saturation 0.2/2.0, blur k5 on v1 | all **≤ 9 px**, peak-confidence 0.25–0.54 (never diffuse) | ❌ ruled out |
+| 5 | Wrong-object lock-on (no target-conditioning) | distractor injection — paste a 2nd identical port into a clean v1 frame | **95% stayed** on the true port, **0% jumped** to the copy | ❌ ruled out |
+| 6 | Architecture (keypoint vs regression) | same-frame KPNet vs DualPoseNet per eval scene | **both fail identically** (see below) | ❌ ruled out |
+| 7 | **Scene-property OOD (content / geometry / pose), acute for SC** | #6 both nets on the eval scenes | SFP both marginal, **SC both catastrophic** | ✅ **confirmed** |
+
+## #6 same-frame method comparison (both nets, identical eval frames)
+| Trial | Scene | KPNet err | DualPoseNet err |
+|---|---|---|---|
+| 1 | SFP | 62 mm | 51 mm |
+| 2 | SFP | 37 mm | 63 mm |
+| 3 | **SC** | **322 mm** | **474 mm** |
+
+Both architectures fail on the **same** SC scene (DualPoseNet even worse); on SFP they're comparable
+and marginal (~40–60 mm). The method is not the differentiator — the **scene** is.
+
+## Bonus finding — jitter = uncertainty (not a defect)
+The "jagged eval trajectory" is the model's confidence signal, not a broken checkpoint. In-domain
+frame-to-frame jitter is 0.2 px; on eval it is trial-1 26–42 px (low-confidence *wander*, rescued to
+8 mm by the 15-frame median filter), trial-2 0.4 px (sharp → worked, 0.03 m), trial-3 5–8 px
+(*confidently wrong* — glued to a distractor NIC card, GT port off-frame). Diffuse heatmap → soft-argmax
+skates between candidate blobs.
+
+## Conclusion
+The eval gap is a **scene-content / geometry OOD**, acute for **SC**. The eval SC port sits at z≈0.01
+(vs 0.13 for SFP) in a layout our generated SC data (only 2 SC rails) doesn't represent, so **no net
+trained on the generated data recognizes it** — v1-SC was easy only because it matched training.
+It is NOT lighting (ruled out), NOT target-conditioning (ruled out), NOT the architecture (ruled out).
+
+## Implication (settles the "more diverse data?" fork)
+Fix = **geometric / content data diversity spanning the legal eval space, SC prioritized** — regenerate
+training scenes covering the SC pose/geometry (and more SFP pose diversity, since SFP is only ~40–60 mm
+for both nets too). Photometric randomization, target-conditioning, and architecture swaps are **not**
+the levers. Judge any fix on the live eval-scene error, never on a generated proxy.
+
+## Artifacts
+| Test | Script |
+|---|---|
+| in-domain prediction video (red=pred, green=GT) | `collect/make_pred_video.py` → `kp_pred_video_ep0007.mp4` |
+| photometric sweep (#4) + heatmap confidence | `collect/probe_lighting.py` |
+| distractor injection (#5) | `collect/distractor_test.py` |
+| same-frame method comparison (#6) | `PerceptionInsertKP` logs `port_dual`; `scratchpad/analyze_method5.py` |
+| red-dot eval videos | `kp_eval_t1/t2/t3.mp4` |
+
+---
+
+# M13 — Three confirmed failure modes from the 3rd-person view (2026-07-05)
+
+A front-on scene camera (`~/aic_results/scenecam_kp/scene.mp4` = ours, `scenecam_cheat3/scene.mp4` =
+CheatCode 279.4 reference) exposed **two failure modes the wrist-cam pixel analysis structurally could
+not see**, which together with the visibility finding (M12/M13-B) give the complete picture.
+
+## The three modes
+
+| # | Failure | Trials | Root cause | Seen via |
+|---|---|---|---|---|
+| **A** | **Tracks the WRONG connector** — goes to a green NIC card instead of the blue SC target | 3 | KPNet is **not target-conditioned** — seeks "a port"; with the blue SC target at the frame edge + green NIC cards present (which our SC training scenes never contained), it grabs the familiar green card | 3rd-person: ours drives to the far-right green card while the blue SC connectors sit untouched center-board; CheatCode centers on the blue SC |
+| **B** | **Target leaves the camera view** | 1, 3 | blue SC port is low (z=0.014) → **off-frame 78–84%** of the trial (100% at home → 25% approach → 0% descent) | wrist-cam GT-projection: `analyze_visibility.py` |
+| **C** | **Plug twist not compensated** | **2** (position was fine at 0.03 m, still didn't seat) | plug is grasped at an angle; CheatCode reads `q_plug` from GT so `q_diff=q_port⊗q_plug⁻¹` tilts the gripper to align. DualPoseNet's plug/port orientation is too coarse → `q_diff≈identity` → **gripper stays straight** → plug enters off-axis → keyed connector rejects it | 3rd-person: CheatCode wrist visibly tilts to match; ours descends vertical/straight |
+
+## How they interlock
+- **A + B on trial 3:** can't *see* the blue connector (B) **and** doesn't *know* to insist on the blue
+  one (A) → defaults to "the same old connector" (the habitual green NIC/SFP target) on the far right.
+- **C on trial 2:** the only trial where *position* was solved (0.03 m proximity) — it failed purely on
+  *angle*. Proof that fixing position alone will not seat the plug.
+
+## Fix list (all perception/policy — no force work)
+1. **Target-conditioning** — detector must seek the *specific* connector (blue SC), not any port.
+   Attacks A. (Conditioning was dropped from KPNet; this is the case where it genuinely matters —
+   unlike the same-type distractor test, which the un-conditioned net passed 95–97%.)
+2. **Center-the-target behavior** — closed-loop: use the rough home-pose estimate to re-orient the wrist
+   so the connector comes to frame center (where the detector is accurate), re-perceive, iterate until
+   stable, *then* descend. Attacks B. Reuses FK extrinsics (moving the camera updates triangulation).
+3. **Perceive-twist-once + FK-track** (or 6-DoF plug keypoints / direct relative-orientation head) —
+   tilt the gripper to the grasp angle. Attacks C.
+
+**Coupling:** 1+2 must go together (conditioning only helps once the connector is in view; centering only
+helps once seeking the right connector). Even with both, trial 2 needs C to actually insert.
+
+## Why GT-fed InsertTuner (277.7) sidesteps all three
+GT gives the exact port identity+position (never wrong connector, never off-frame — A,B) and exact plug
+orientation (correct tilt — C). Our perception must reconstruct all three; the eyes, not the hands, are
+the gap. Videos: `scenecam_kp/scene.mp4`, `scenecam_cheat3/scene.mp4`, `scenecam_side_by_side.mp4`.
+
+---
+
+# M14 — Plug grasp offset is TYPE-FIXED → plug pose from kinematics, no vision (2026-07-05)
+
+Follow-up to M13 mode C (plug twist uncompensated). The plug is rigidly held, so
+`T_grasp = inv(gripper_FK) · plug` is the fixed rotation+translation from gripper to plug. Measured it
+per frame across the eval trials (gt:=true, logging `gripper/tcp` FK + GT plug tip). Result: **the grasp
+offset is constant within a trial AND identical across trials of the same connector type.**
+
+## Measured grasp offset (gripper → plug)
+| Connector | rotation (euler xyz, deg) | translation (m) | within-trial drift | same-type spread |
+|---|---|---|---|---|
+| **SFP** (trials 1,2) | **[20.5, 1.1, −3.0]** | [0.000, −0.021, 0.052] | ≤0.3° | **0.0°** (trial1 vs trial2) |
+| **SC** (trial 3) | **[−1.6, −25.2, 75.5]** | [−0.004, −0.011, 0.012] | ≤0.1° | — |
+| cross-type (SFP vs SC) | — | — | — | **80°** |
+
+- **Rigid within a trial** (≤0.3° drift) → no cable-flex at the tip; a single measurement suffices.
+- **Type-fixed** (SFP↔SFP = 0.0°, SFP↔SC = 80°) → one constant per connector type, not per episode.
+
+## Consequence — the plug side becomes free
+```
+plug pose = FK(gripper) · T_grasp[type]        # exact, every frame, ZERO vision
+```
+- **Solves mode C:** the gripper tilts to the true grasp angle (20.5° SFP / 75° roll SC) instead of
+  staying straight — the off-axis insertion that killed trial 2 (0.03 m, position was fine).
+- **Eliminates DualPoseNet's plug entirely** — the coarse plug estimate is replaced by an exact
+  FK-derived pose. Vision is now needed ONLY for the port, never the plug.
+- Reconstructs exactly what CheatCode reads from GT, using FK + 2 baked constants.
+
+## Fairness / generality
+The eval uses a **deterministic** grasp per type (why it's fixed); our own generator randomizes grasp
+roll/pitch/yaw (`gen_configs.py grasp_droll`), so our data wouldn't show this. The clean, unquestionably
+fair source is the **public cable template's nominal grasp** — same constant, no reading eval GT.
+TODO: verify the template's nominal grasp matches [20.5, 1.1, −3.0] (SFP) before baking in.
+
+## What still needs vision (port side only)
+`q_diff = q_port ⊗ q_plug⁻¹` — with `q_plug` now exact, the remaining error is **port orientation**
+(coarse DualPoseNet) and **port position** (KPNet; the visibility/conditioning modes A/B). Plug is solved.
+
+Script: `scratchpad/analyze_grasp.py`; logging added to `PerceptionInsertKP` (`gripper_tf`/`plug_gt_tf`/`port_gt_tf`).
