@@ -343,3 +343,79 @@ TODO: verify the template's nominal grasp matches [20.5, 1.1, −3.0] (SFP) befo
 (coarse DualPoseNet) and **port position** (KPNet; the visibility/conditioning modes A/B). Plug is solved.
 
 Script: `scratchpad/analyze_grasp.py`; logging added to `PerceptionInsertKP` (`gripper_tf`/`plug_gt_tf`/`port_gt_tf`).
+
+---
+
+# M15 — Ceiling validation: GT-port + FK-plug = 227.8 (2026-07-05)
+
+Oracle test to isolate the remaining gap: feed a PERFECT port (GT TF) while keeping everything else
+honest — plug from FK (`FK(gripper)·T_grasp[type]`, no GT) + the reactive descent. NOT a submittable
+score (uses GT port); it bounds what solving port perception is worth.
+
+## Result
+| Trial | Type | tier-3 | outcome |
+|---|---|---|---|
+| 1 | SFP | **75** | full insertion ✅ |
+| 2 | SFP | **75** | full insertion ✅ |
+| 3 | SC | **39.6** | **partial**, 0.01 m (not latched) |
+| **total** | | **227.8** | vs CheatCode 279.4 |
+
+## What it proves
+- **FK plug is correct** — the two full seats used NO GT plug, only kinematics. Stage-1 grasp finding validated.
+- **Reactive hands work** for SFP given a good port.
+- **Port perception is the sole remaining PERCEPTION gap** — swap in a correct port and the same policy
+  jumps from −81 to 227.8.
+
+## Honest caveat — SFP vs SC (only 1 of 2 connector types fully seats here)
+SFP seats fully (2/2); **SC only reaches partial (0.01 m) even with a perfect port + correct FK plug.**
+That is a limitation of THIS policy's reactive descent (force-stop + golden spiral + yaw dither), which
+was tuned around SFP — not a fundamental block: the separate **InsertTuner** stack seats SC 3/3 with GT
+(277.7, see `force_insertion.md`). So SC seating is solved on the hands side elsewhere; `PerceptionInsertKP`'s
+simpler descent needs SC-specific tuning (depth / force / keying) to close the last 0.01 m.
+
+## Net status
+- Plug: solved (kinematics). Hands: solved for SFP here, SC solved by InsertTuner.
+- Remaining: **port perception** (board-yaw orientation + type-aware position) — M13/M14 decomposition.
+
+---
+
+# M16 — Board→port geometry: port orientation reduces to a single scalar (board yaw) (2026-07-05)
+
+Foundation for Stage 2 (port perception). Measured directly from GT TF, no model files.
+
+## Method
+Run `ground_truth:=true` → sim publishes true TF for `task_board` AND the port. Each frame log two
+transforms from the robot TF tree: `base_link ← task_board` and `base_link ← port_link`. Then compose
+```
+T_board_port = inv(T_base_board) · T_base_port      # port pose in the board's own frame
+```
+(Logging added to `PerceptionInsertKP`: `board_tf`, `port_gt_tf`; run `kp_boardgeo`.)
+
+## Result 1 — port-in-board offset is fixed, orientation is per-type constant (std 0)
+| Trial | Type | port-in-board position (m) | port-in-board orientation (deg) |
+|---|---|---|---|
+| 1 | SFP | [−0.055, −0.107, 0.134] | **[179.3, 0, 0]** |
+| 2 | SFP | [−0.089, −0.027, 0.134] | **[179.3, 0, 0]** |
+| 3 | SC | [−0.115, 0.070, 0.015] | **[−180, 0, −90]** |
+
+Orientation is a **fixed per-type constant** (SFP vs SC differ by the −90° yaw = the SC's grasp/keying
+difference). Position is per-target (mount/rail/port) and varies with the rail slide (±2.3 cm SFP / ±6 cm SC).
+
+## Result 2 — the board is FLAT (verified, not assumed)
+Board pose in base_link (`base_link ← task_board`):
+| Trial | roll | pitch | yaw | z |
+|---|---|---|---|---|
+| 1 | −0.0° | −0.0° | −2.4° | 0.000 |
+| 2 | −0.0° | −0.0° | 2.3° | 0.000 |
+| 3 | −0.0° | −0.0° | 76.8° | −0.000 |
+
+roll = pitch = 0, z = 0 (on the table plane) across all trials — **only yaw changes.**
+
+## Consequence for Stage 2
+```
+port orientation (base) = board_yaw ⊗ offset[type]
+```
+`offset[type]` is measured/fixed and "board flat" is verified → the **only unknown for port orientation
+is the single scalar `board_yaw`.** Stage 2's orientation piece collapses from full-6-DoF pose estimation
+to estimating one number — the robust, high-leverage first build (un-blocks the FK plug / the −81 coupling).
+Port *position* still needs vision (board·offset ± rail slop is too coarse alone) → type-aware centered search.
