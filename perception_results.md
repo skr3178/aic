@@ -110,3 +110,97 @@ harness-managed background (not bare `nohup`), or they get reaped mid-epoch.
   Then `score.sh <policy> false`. The score's gap to CheatCode's **279** ceiling = the real cost of the 12 mm.
 - **Accuracy levers (after M4 tells us how far 12 mm gets us):** (a) re-select/orientation-aware checkpoint;
   (b) direct relative-pose head (`port − plug`); (c) scale the sim dataset; (d) temporal fusion across frames.
+
+---
+
+# Keypoint detector + multi-view triangulation (first pass) — 2026-07-05 — ⚠️ PROXY ONLY (see correction at end)
+
+> **CORRECTION (M11, same day):** the 1.9 mm below is on `perception_v1`, a *generated* collection —
+> NOT the vaulted eval domain. The live eyes+hands test (`PerceptionInsertKP`) measured real eval-scene
+> perception at **8–40 mm (SFP) / 300–430 mm (SC, catastrophic)** and scored **−43.3 / −22.8** (below
+> M7b +1.4). The v1 proxy did not transfer; the generated→vaulted domain gap is unsolved. Read this
+> section as "the detector trains + triangulates correctly," not "perception solved." Full M11 at end.
+
+The regression net above (DualPoseNet, global port/plug pose regression) looked fine in-distribution
+(~12 mm val) but **blew up to 69–220 mm on the live eval scenes** (`RUN_PLAN.md` M7a) — it memorized scene
+cues instead of localizing the port. Rebuilt perception as **local keypoint detection + geometry**: detect
+the port-center pixel in each wrist view, back-project to a `base_link` ray, intersect the 3 rays.
+
+## Method (all standalone; `PerceptionInsert.py` untouched, per constraint)
+- **Detector** (`collect/kp_train.py`): ResNet-18 → upsample decoder → 1-channel heatmap → soft-argmax →
+  (u,v). Trained on `perception_native_c256 + perception_v2_c256` (219 eps, 288×256), **episode-wise seeded
+  split** (186/33, no frame leakage), stride 3 → 73k/13k image-views. GPU-bound ~81 s/epoch; converged
+  epoch 8 (val 2D median **3.5 px ≈ mm**). `best.pt` → `~/aic_data/kp_v1_run/`.
+- **Triangulation** (`collect/kp_eval3d.py`): per-cam pixel → ray in `base_link` via `T_base_cam`;
+  least-squares 3-ray intersection → port xyz. Offline `T_base_cam` reconstructed from the GT port pose
+  correspondence (`T_base_port · inv(T_cam_port)`); **self-check: feeding GT pixels recovers `port_base` to
+  0.0 mm**, validating extrinsics + the wxyz convention. Live path uses TF for `T_base_cam`.
+- **Deployable module** (`collect/kp_perceive.py`): `KeypointPerceiver` — images + K + T_base_cam → port
+  xyz in `base_link`. The reusable "eyes."
+
+## Results — 3D port position error (self-check 0.0 mm on both sets)
+| Set | n | median | mean | p90 |
+|---|---|---|---|---|
+| In-dist val (native+v2 held-out episodes) | 1650 | 3.9 mm | 14.6 mm | 34.6 mm |
+| **OOD — `perception_v1` (foreign collection, never trained on)** | 2348 | **1.9 mm** | 6.3 mm | **11.9 mm** |
+| v1 depth near-half / far-half | — | 1.3 / 2.6 mm | — | — |
+
+vs the regression it replaces: **~12 mm val → 69–220 mm eval**.
+
+## Read
+- **OOD gap eliminated** — keypoint+triangulation is *better* OOD (1.9 mm) than in-dist (3.9 mm), the
+  opposite of the regression net. Local features transfer; global regression memorized.
+- **Triangulation kills the 2D tail** — per-cam 2D p90 ~40 px on the hard val → 3D p90 12 mm on v1.
+- **Consistency:** OOD p90 = 11.9 mm (90% of *single* frames < 12 mm); temporal median over the approach →
+  ~1.9 mm effective — well inside any plausible insertion basin.
+- **Trains hard → tests easy:** trained on v2's wide randomization (all rails, ±1.5 rad), so v1's narrow
+  scenes are trivial (per-cam 1.6–2.2 px). Healthy direction of generalization.
+
+## Honest gaps before "solved"
+1. v1 is a held-out *collection* (strong OOD proxy), NOT the live `aic_engine` eval scenes where the
+   69–220 mm was measured. Live eval-scene number is the last measurement.
+2. GT-derived extrinsics offline; live uses TF/FK (+~1–2 mm). Self-check confirms residual is pure
+   detector error, so live degradation is bounded by FK accuracy.
+
+## Next
+- Live eval-scene perception logger (`KeypointPerceiver` + TF) on one GT eval → the real OOD number.
+- On confirmation, wire `KeypointPerceiver` into the standalone insertion re-score (InsertTuner hands +
+  these eyes). Pass 2: mesh→port frame fix + 8 cage corners → 6-DoF orientation; 1024 high-res polish.
+- Full technical record + pipeline diagram: `keypoint_pnp_perception_plan.md` §10.
+
+---
+
+# M11 — Live eyes+hands test on the REAL eval scenes (2026-07-05) — the proxy correction
+
+`PerceptionInsertKP` (standalone): keypoint port position (our eyes) + DualPoseNet orientation/plug +
+reactive CheatCode descent. Controlled A/B vs M7b (+1.4) — only the port-position source changed.
+
+**Score:** −43.3 (gt:=false) / −22.8 (gt:=true, perception-logged). Both below the +1.4 baseline.
+
+**Live perceived-port vs GT-port (the number that matters), per eval trial:**
+| Trial | Connector | GT port (base_link) | kp error raw → filtered | scoring final dist |
+|---|---|---|---|---|
+| 1 | SFP | [-0.42, 0.31, 0.13] | 48 mm → **8 mm** | 0.11 m |
+| 2 | SFP | [-0.45, 0.12, 0.13] | **37 mm** (0 gated) | 0.03 m (+25 proximity) |
+| 3 | **SC** | [-0.50, 0.25, **0.01**] | **300–430 mm** (24/37 frames gated) | 0.54 m |
+
+**Findings:**
+- **NOT a scale/K bug** — live images arrive native `[1024,1152]`; corr(off-center pixel dist, 3D error)
+  = 0.08. Triangulation + intrinsics are correct (self-check was 0.0 mm).
+- **The v1 proxy (1.9 mm) did not transfer.** v1 is a *generated* collection sharing the training
+  pipeline; the vaulted eval scenes are a different visual domain. Real SFP error is 8–40 mm (≈20× the
+  proxy), and SC is broken (detector puts the low SC port — z=0.01 — 17 cm too high, 30–43 cm off,
+  emitting image-edge u=0/279 garbage two-thirds of the time).
+- **vs the regression it aimed to beat:** better on SFP (8–40 vs 69–112 mm) but **worse on SC**
+  (430 vs 220 mm). The SC catastrophe drives the arm into the enclosure (−24 contact, −12 force) and is
+  the primary score-killer.
+- **Pipeline mechanically works:** trial 2 reached **0.03 m** (best GT-free proximity ever) — when the
+  eyes lock on, eyes+hands compose correctly. Seating still blocked (orientation ~9° + plug + keying).
+
+**Root cause:** the generated→vaulted **domain gap** (same gap the regression had), acute for SC; plus a
+single un-conditioned "find-a-port" keypoint with no target identity. NOT geometry, NOT a bug.
+
+**Candidate fixes (unvalidated):** (a) SC-specific data / debugging the low-z SC failure; (b) domain
+randomization (lighting/texture) or eval-representative data to close generated→vaulted; (c) target
+conditioning + confidence/peak-sharpness gating to kill edge-garbage; (d) an eval-domain proxy set so we
+stop being fooled by v1. Judge every fix by the live eval-scene error + score, never by a generated proxy.

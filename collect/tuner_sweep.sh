@@ -31,7 +31,7 @@ run_chunk() {
     -e __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/10_nvidia.json \
     -v "$AICLOCAL/10_nvidia.json:/usr/share/glvnd/egl_vendor.d/10_nvidia.json:ro" \
     -e AIC_RESULTS_DIR=/results -v "$res:/results" \
-    -v "$COLLECT:/collect:ro" \
+    -v "$COLLECT:/collect:ro" ${SNAP_OUT:+-v "$SNAP_OUT:/data"} \
     "$IMAGE" \
     aic_engine_config_file:=/collect/configs/chunk_${k}.yaml ground_truth:=true \
     gazebo_gui:=false launch_rviz:=false start_aic_engine:=true \
@@ -44,6 +44,9 @@ run_chunk() {
   done
   if [ "$up" != 1 ]; then docker rm -f "$name" >/dev/null 2>&1; docker network rm "$net" >/dev/null 2>&1; echo "[tuner] chunk $k FAILED (engine never up)"; return 1; fi
   docker exec -d "$name" bash -lc "$RMWENV; export PYTHONPATH=/collect:\$PYTHONPATH; export TUNER_OFFSETS=/collect/tuner_offsets.json; export TUNER_TRIAL_BASE=$((k*TRIALS_PER_CHUNK)); ros2 run aic_model aic_model --ros-args -p use_sim_time:=true -p policy:=insert_tuner.InsertTuner >/results/tuner_policy.log 2>&1"
+  if [ -n "${SNAP_OUT:-}" ]; then
+    docker exec -d "$name" bash -lc "$RMWENV; python3 /collect/collector_node.py --chunk $k --manifest /collect/manifest.json --out /data --hz 5 --scale 0.25 --ros-args -p use_sim_time:=true >/results/collector.log 2>&1"
+  fi
   docker wait "$name" >/dev/null 2>&1
   docker rm -f "$name" >/dev/null 2>&1 || true
   docker network rm "$net" >/dev/null 2>&1 || true

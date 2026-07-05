@@ -74,5 +74,15 @@ Perceived-vs-GT port error on the eval scenes (val error was ~11 mm):
 `eval_config.yaml`, regenerate configs to **span those ranges** (match ranges, don't copy scenes),
 recollect (free in sim), retrain, re-score.
 
+## Perception bottleneck — resolved at proxy level (M10, 2026-07-05)
+The M5/M7a diagnostics above pinned the entire GT-free score ceiling on perception: the DualPoseNet
+regressor read ~12 mm in val but **61–372 mm on eval** (coverage/OOD gap). Perception was rebuilt as a
+**keypoint detector + 3-ray triangulation** (`perception_results.md`, `RUN_PLAN.md` M10): held-out OOD
+**1.9 mm median / 11.9 mm p90** on `perception_v1` — *better* OOD than in-distribution, gap eliminated.
+Not yet a new /300 row: this is a perception-**accuracy** result on held-out collections, not a game score.
+The live eval-scene number + wiring `KeypointPerceiver` into the InsertTuner re-score (**277.7 hands + these
+eyes**) is what moves this table next — `eval_score ≈ 277.7 × P(perception in basin)`, and 1.9 mm sits far
+inside the basin.
+
 ## Raw results
 - `~/aic_results/{cheatcode,wavearm,runact,perceptioninsert}/scoring.yaml` (per-trial tiers + messages).
