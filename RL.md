@@ -4,6 +4,45 @@ Summary of what each of the three provided simulators offers for **RL**, and whe
 (Our primary strategy is **#7 learned-perception + analytic control**, which is *supervised, not RL*.
 RL — approaches **#6 (RL)** / **#8 (residual RL)** — is a *later* option to sharpen the contact phase.)
 
+## Where RL fits in the challenge pipeline (confirmed 2026-07-07)
+
+```
+Vision → port/connector pose     ← perception (supervised: keypoints/PnP), NOT RL
+        ↓
+Approach to port opening         ← analytic / CheatCode-style, uses the estimated pose
+        ↓
+Force-insertion (seat it)        ← RL adds value here
+```
+
+**RL does not detect the port** — that's perception. You must localize the port first to even reach
+the phase where RL helps. RL runs *downstream of* perception and consumes its pose estimate.
+
+Three refinements that make the boundary precise:
+
+1. **What RL buys you at insertion = robustness to perception error, via force feedback.** Not just the
+   final push. Perception gives an *approximate* port pose (a few mm / few deg off); open-loop insertion
+   from that estimate fails on tight tolerances (even CheatCode with *perfect* ground truth barely seats).
+   RL learns to use the **F/T wrench** to search-and-seat despite residual pose error + contact — the
+   compliant behavior analytic control can't do well. That's why RL specifically at the contact phase.
+2. **Train on ground-truth pose + injected noise; swap in perception at deploy.** In MJX training the
+   port pose is free (GT); deliberately **add noise** to mimic perception error so the policy tolerates a
+   bad estimate. At deploy, perception's output replaces the GT input — same policy. This is *why* the two
+   modules compose cleanly.
+3. **End-to-end vision→action RL is possible but not here, not smart.** It needs parallel *vision* RL,
+   which is blocked on this Blackwell (Isaac renderer). The challenge also hands qualified teams a separate
+   Vision Model — a strong signal the intended architecture is **perception as its own module, RL/control
+   layered on top.**
+
+**Consequence — sequencing:** perception is the prerequisite and the higher-priority lever (no port
+estimate → no insertion phase to RL on). Do **perception first**, then the force-insertion RL on top,
+trained in MJX with GT+noise and validated in the Gazebo scorer.
+
+**Recommended RL stack** (see `rl_mujoco/` for the working scaffold): state-based obs (proprioception +
+F/T + port pose), **rigid-connector abstraction** on **MJX-JAX** (mature parallel PPO; MJX-JAX drops the
+`elasticity.cable` plugin but that doesn't bite once the connector is modeled rigid), **residual RL over a
+CheatCode base action**, Cartesian-impedance action space (matches `aic_controller`, transfers to Gazebo),
+reward shaped after `aic_scoring` tiers, pose-noise + friction domain randomization.
+
 ## TL;DR
 - **Isaac Lab = the intended parallel-RL path.** It ships a **working, GPU-vectorized PPO env**
   (`AIC-Task-v0`) — but the reward is **pose-reaching** and the **gripper + cable are disabled**, so

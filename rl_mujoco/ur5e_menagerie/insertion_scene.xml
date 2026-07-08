@@ -1,0 +1,23 @@
+<mujoco model="ur5e_insertion_smoke">
+  <!-- Single-env RL smoke-test scene: menagerie UR5e + a fixed "port" target.
+       TCP = the robot's attachment_site (tool flange). Insertion-flavored reach:
+       drive the flange to the port pose. Rigid-plug + real SC-port geometry come
+       later; this scene exists to prove the RL loop runs on one env. MJX-compatible
+       (rigid bodies only, no elasticity plugin). -->
+  <include file="ur5e.xml"/>
+
+  <statistic center="0.3 0.1 0.3" extent="1.0"/>
+
+  <worldbody>
+    <light pos="0 0 2" dir="0 0 -1" diffuse="0.8 0.8 0.8"/>
+    <geom name="floor" type="plane" size="2 2 0.1" rgba="0.3 0.3 0.35 1"
+          contype="0" conaffinity="0"/>
+    <!-- Fixed target port. contype/conaffinity=0 so it is a pure kinematic target
+         (no contact) for this reach smoke test. -->
+    <body name="port" pos="0.45 0.15 0.35">
+      <geom type="box" size="0.025 0.025 0.01" rgba="0.15 0.3 0.85 1"
+            contype="0" conaffinity="0"/>
+      <site name="port_site" pos="0 0 0.0" size="0.006" rgba="1 0.2 0.2 1"/>
+    </body>
+  </worldbody>
+</mujoco>

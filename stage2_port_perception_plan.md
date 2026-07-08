@@ -134,3 +134,44 @@ detector + triangulation, exploit the static target with **stamp-synced, multi-f
 aggregation (tightens on approach), derive **port orientation from a single scalar (board yaw)** and
 **port position from board·offset + a type-aware close-range refine** — then compose with the solved FK
 plug and reactive hands. Ceiling proven at ~227.
+
+---
+
+## 10. Findings 2026-07-06 — error budget quantified + board-extractor A1 FAILED
+
+**Error budget (why the type split is decisive).** The reactive force **spiral radius = PITCH×steps =
+1.2 mm × 30 = 3.6 cm** — the max aim error the hands forgive. Public `task_board_limits` give the hidden
+**rail slide** (how far the module is randomly slid along its rail): **SFP nic_rail ±2.3 cm, SC sc_rail
+±6.0 cm**. So:
+- **SFP: rail slide (±2.3) < spiral (3.6)** → board-nominal position + spiral is **airtight; no slide
+  perception needed.**
+- **SC: rail slide (±6.0) > spiral (3.6)** → board-nominal alone misses at the extremes → needs a **1-D
+  search along the known rail axis** (board pose gives the rail direction), not blind 2-D.
+- Reframes port position as **estimating ONE scalar along a known line**, not 3-D socket hunting.
+- Diagrams: `diag_frames/rail_slide.png`, `diag_frames/spiral_radius.png`.
+
+**A1 (board-size-prior fit) FAILED on the real saved sweep clouds** (`~/aic_data/sweep_pts_trial{1,2,3}.npy`).
+Min-area / size-prior rectangle fit vs M16 GT yaw:
+
+| trial | fit-yaw err | recovered aspect | recovered size |
+|---|---|---|---|
+| 1 (SFP) | **31.6°** | →~1.0 (square) when trimmed | ~1.3×1.0 m |
+| 2 (SFP) | **41.1°** | →~1.0 | ~1.3×1.0 m |
+| 3 (SC)  | **23.7°** | →~1.0 | ~1.3×1.0 m |
+
+- Not <2° — it's 24–42° and unstable across trim levels. Footprint is a **square, table-sized blob 4× the
+  board (0.30×0.425)**: the dark-gray back-projection grabs the **whole dark workspace** (board + table +
+  shadows), not the board rectangle. No recoverable 1.4:1 board at any trim.
+- **The earlier "~2° board yaw" leaned on the `DISAMBIG_GT` GT crutch** — remove GT and the fit is 24–42°.
+  Board pose is **NOT yet reliably recoverable GT-free.** The plan's linchpin is unproven.
+
+**Status honestly:** plug ✅ (FK), hands ✅ (277.7), **board pose ❌ (broken extractor)**. Phases A2/A3/B/C
+all sit on board pose → blocked until a working board primitive exists.
+
+**Next test (offline, cheap, before any eval run):** replace dark back-projection with a **rail-line
+orientation** detector (Hough / dominant-angle on the saved sweep *images*, not the cloud). Rails are
+high-contrast parallel slots at a fixed board angle → yaw directly, far more robust than a blob-rectangle.
+Pass bar: dominant rail-angle <5° on all 3 trials. Fallbacks: board-outline edge/contour fit; colored-
+feature (magenta zones + green cards) convex hull for extent/center. Also drop the "domain-gap-immune"
+claim → **robust**: the gray threshold (35–135) is still an appearance assumption; guard with Otsu /
+largest-planar-component.

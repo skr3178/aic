@@ -7965,7 +7965,7 @@ packages:
   - ros2-distro-mutex >=0.15.0,<0.16.0a0
   - libcxx >=22
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_interfaces/aic_control_interfaces
   name: ros-kilted-aic-control-interfaces
@@ -7986,7 +7986,7 @@ packages:
   - libgcc >=15
   - libstdcxx >=15
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_example_policies
   name: ros-kilted-aic-example-policies
@@ -8011,7 +8011,7 @@ packages:
   - ros2-distro-mutex >=0.15.0,<0.16.0a0
   - libcxx >=22
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_example_policies
   name: ros-kilted-aic-example-policies
@@ -8038,7 +8038,7 @@ packages:
   - libgcc >=15
   - libstdcxx >=15
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_model
   name: ros-kilted-aic-model
@@ -8062,7 +8062,7 @@ packages:
   - ros2-distro-mutex >=0.15.0,<0.16.0a0
   - libcxx >=22
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_model
   name: ros-kilted-aic-model
@@ -8088,7 +8088,7 @@ packages:
   - libgcc >=15
   - libstdcxx >=15
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_interfaces/aic_model_interfaces
   name: ros-kilted-aic-model-interfaces
@@ -8109,7 +8109,7 @@ packages:
   - ros2-distro-mutex >=0.15.0,<0.16.0a0
   - libcxx >=22
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_interfaces/aic_model_interfaces
   name: ros-kilted-aic-model-interfaces
@@ -8132,7 +8132,7 @@ packages:
   - libgcc >=15
   - libstdcxx >=15
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_interfaces/aic_task_interfaces
   name: ros-kilted-aic-task-interfaces
@@ -8147,7 +8147,7 @@ packages:
   - ros2-distro-mutex >=0.15.0,<0.16.0a0
   - libcxx >=22
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_interfaces/aic_task_interfaces
   name: ros-kilted-aic-task-interfaces
@@ -8164,7 +8164,7 @@ packages:
   - libgcc >=15
   - libstdcxx >=15
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_utils/aic_teleoperation
   name: ros-kilted-aic-teleoperation
@@ -8181,7 +8181,7 @@ packages:
   - ros2-distro-mutex >=0.15.0,<0.16.0a0
   - libcxx >=22
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_utils/aic_teleoperation
   name: ros-kilted-aic-teleoperation
@@ -8200,7 +8200,7 @@ packages:
   - libgcc >=15
   - libstdcxx >=15
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_utils/aic_training_interfaces
   name: ros-kilted-aic-training-interfaces
@@ -8215,7 +8215,7 @@ packages:
   - ros2-distro-mutex >=0.15.0,<0.16.0a0
   - libcxx >=22
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_utils/aic_training_interfaces
   name: ros-kilted-aic-training-interfaces
@@ -8232,7 +8232,7 @@ packages:
   - libgcc >=15
   - libstdcxx >=15
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: https://conda.anaconda.org/robostack-kilted/linux-64/ros-kilted-ament-cmake-2.7.5-np2py312h2ed9cc7_19.conda
   sha256: b70debda536f646978317d943fa8fd8654202faeb68a8f9ea00848e5baf05821
@@ -10724,7 +10724,7 @@ packages:
   - ros2-distro-mutex >=0.15.0,<0.16.0a0
   - libcxx >=22
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: aic_utils/lerobot_robot_aic
   name: ros-kilted-lerobot-robot-aic
@@ -10746,7 +10746,7 @@ packages:
   - libgcc >=15
   - libstdcxx >=15
   - python_abi 3.12.* *_cp312
-  - numpy >=1.23,<3
+  - numpy >=1.25,<3
   license: LicenseRef-Apache-2.0
 - conda: https://conda.anaconda.org/robostack-kilted/linux-64/ros-kilted-libstatistics-collector-2.0.1-np2py312h2ed9cc7_19.conda
   sha256: 562f3687acfc6b6cc9689cbb60dc3d68509176905295e6c3a4cab11a9b8a6b04
