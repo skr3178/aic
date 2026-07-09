@@ -218,7 +218,7 @@ trials -> insertions -> score approaching the 277.7 the hands already deliver.
 ```
 
 **The two directions at a glance:**
-- **Training** = `known 3D port -> project (K) -> 2D dot` — camera projection, makes labels (the smoke test: `kp_smoke_overlay.png`).
+- **Training** = `known 3D port -> project (K) -> 2D dot` — camera projection, makes labels (the smoke test: `media/frames/kp_smoke_overlay.png`).
 - **Inference** = `image -> net -> 2D dot x3 -> triangulate -> 3D -> TF -> base_link` — the reverse, done by geometry (no GT).
 - **Frames:** GT/output live in **`base_link`** (world-fixed, the control frame); the net works in the **moving camera frame**; **FK** bridges them. The **plug** comes from kinematics, not vision.
 

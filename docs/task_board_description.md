@@ -9,7 +9,7 @@ This task board will serve here as the primary environment for evaluating dexter
 
 The task board provides a standardized physical interface for the manipulation of **[SFP (Small Form-factor Pluggable)modules, LC (Lucent Connector) fiber optic and SC (Subscriber Connector) fiber optic](https://www.versitron.com/pages/sfp-sc-and-lc-connectors-transceivers-defined-and-analyzed-in-detail)** connectors. It is divided into four distinct zones to separate the assembly targets from the initial component pick locations.
 
-![AIC Task Board](../../media/aic_task_board.png)
+![AIC Task Board](../media/board/aic_task_board.png)
 
 ## 2. Zone Descriptions
 
@@ -23,7 +23,7 @@ This modular layout requires the robot to transition from organized picking from
 ### Zone 1: Network Interface Cards (NIC)
 This zone represents the networking switch or server compute tray where data links are established.
 
-![AIC Task Board](../../media/aic_board_zone_1.png)
+![AIC Task Board](../media/board/aic_board_zone_1.png)
 
 * **Components:** Supports up to five dual-port network cards (NIC).
 * **Ports:** Each card features two SFP ports.
@@ -31,24 +31,24 @@ This zone represents the networking switch or server compute tray where data lin
   * Card translation limits: [-0.0215, 0.0234] meters,
   * Card orientation limits: [-10, +10] degrees.
 
-![AIC Task Board](../../media/aic_board_zone_1_legend.png)
+![AIC Task Board](../media/board/aic_board_zone_1_legend.png)
 
 ### Zone 2: SC Optical Ports
 This zone emulates the optical patch panel or backplane of a server rack.
 
-![AIC Task Board](../../media/aic_board_zone_2.png)
+![AIC Task Board](../media/board/aic_board_zone_2.png)
 
 * **Ports:** Supports up to five SC ports, distributed across two rails.
 * **Flexibility:** Ports can slide along their rails to allow for randomized positional offsets.
   * SC port translation limits: [-0.06, 0.055] meters
 
-![AIC Task Board](../../media/aic_board_zone_2_legend.png)
+![AIC Task Board](../media/board/aic_board_zone_2_legend.png)
 
 ### Zone 3 & 4: Pick Locations
 Zones 3 and 4 serve as organized supply areas for components (LC plugs, SC plugs, and SFP modules) before they are routed and inserted.
 
-![AIC Task Board](../../media/aic_board_zone_3.png)
-![AIC Task Board](../../media/aic_board_zone_4.png)
+![AIC Task Board](../media/board/aic_board_zone_3.png)
+![AIC Task Board](../media/board/aic_board_zone_4.png)
 
 * **Mounts:** Holds fixtures for LC/SC plugs and SFP modules.
 * **Customization:** Fixtures can be placed on any rail in any order, creating a high-mix environment.
@@ -56,11 +56,11 @@ Zones 3 and 4 serve as organized supply areas for components (LC plugs, SC plugs
   * Fixture orientation limits: [-60, +60] degrees
 
 
-![AIC Task Board](../../media/aic_board_zone_3_legend_1.png)
-![AIC Task Board](../../media/aic_board_zone_3_legend_2.png)
+![AIC Task Board](../media/board/aic_board_zone_3_legend_1.png)
+![AIC Task Board](../media/board/aic_board_zone_3_legend_2.png)
 
-![AIC Task Board](../../media/aic_board_zone_4_lengend_1.png)
-![AIC Task Board](../../media/aic_board_zone_4_legend_2.png)
+![AIC Task Board](../media/board/aic_board_zone_4_lengend_1.png)
+![AIC Task Board](../media/board/aic_board_zone_4_legend_2.png)
 
 ## 3. Bill of Material (BOM)
 

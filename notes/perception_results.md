@@ -257,11 +257,11 @@ the levers. Judge any fix on the live eval-scene error, never on a generated pro
 ## Artifacts
 | Test | Script |
 |---|---|
-| in-domain prediction video (red=pred, green=GT) | `collect/make_pred_video.py` → `kp_pred_video_ep0007.mp4` |
+| in-domain prediction video (red=pred, green=GT) | `collect/make_pred_video.py` → `media/videos/kp_pred_video_ep0007.mp4` |
 | photometric sweep (#4) + heatmap confidence | `collect/probe_lighting.py` |
 | distractor injection (#5) | `collect/distractor_test.py` |
 | same-frame method comparison (#6) | `PerceptionInsertKP` logs `port_dual`; `scratchpad/analyze_method5.py` |
-| red-dot eval videos | `kp_eval_t1/t2/t3.mp4` |
+| red-dot eval videos | `media/videos/kp_eval_t1/t2/t3.mp4` |
 
 ---
 
