@@ -81,7 +81,7 @@ The deployed force stack is a **degraded port of `InsertTuner`** (our rig valida
 | # | fix | gain | risk |
 |---|---|---|---|
 | **A** | **Two-segment approach** — hold altitude while translating, *then* straight down. (Today it descends **diagonally while translating** into the card: TCP z 0.328→0.271 during the lateral move.) **Rule: no simultaneous lateral translation + descent near the card.** | **+36** → ~128 | low |
-| **B** | **Restore the real force stack** — `F_STOP` 4.0, stall detect, RCC compliance. *A restoration of validated code, not an invention.* Do **after A**: `F_STOP=4.0` is sensitive enough that trial-0's 93 N card scraping would false-trigger the search. | **+74** → ~166 | medium — capture basin at 2–3 mm **never measured** |
+| **B** | ⚠️ **TRIED — NET REGRESSION.** Restored force stack — `F_STOP` 4.0, stall detect, RCC compliance. *A restoration of validated code, not an invention.* Do **after A**: `F_STOP=4.0` is sensitive enough that trial-0's 93 N card scraping would false-trigger the search. | **+74** → ~166 | medium — capture basin at 2–3 mm **never measured** |
 | **C** | **Fix the SC port lock** (58 mm off; offline was 6/6 ≤1 mm ⇒ findable bug) | +20…40 | low |
 | ~~D~~ | sub-mm perception | +74 | slow, uncertain |
 | ~~E~~ | continuous re-lock | 0 | solves a problem we don't have (target is static **and** correct) |

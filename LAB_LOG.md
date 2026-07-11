@@ -133,6 +133,25 @@ The pipeline splits into three independent levels. **Default line = CheatCode (G
   - **MY OWN BUGS (fermat/raster/golden runs are INVALID):** (a) tip-z stall detector **false-fires right after each retract** (tip moves UP ⇒ "didn't descend" ⇒ blocked) → they burned 114/169/31 probes in ~3 control steps each and never tested one; (b) force-guided bias sign **inverted** (`atan2(-fy,-fx)`), sending the slide search 180° off — its "drop-in" was the plug **falling off the cage edge**.
   - **GENUINE FINDINGS KEPT:** (1) **tip-z stall is the correct contact signal** (it fired at `dF −2.4 N`, far below any force threshold) — *and it was already in InsertTuner, dropped in the port*; (2) **the lateral force vector points AT the hole** — within **12–20°** of the true correction on both SFP trials (`(-0.2,-6.9)N` vs needed `(-0.7,-1.8)mm`; `(+0.7,-5.9)N` vs `(+1.0,-3.0)mm`); (3) **our port ORIENTATION is EXACT (0.00° vs GT)** on all 3 eval trials → the old ±2.9/5.7° yaw dither was *injecting* an error we don't have.
   - **NEXT:** restore the REAL force stack (F_STOP 4.0 + stall + RCC compliance) — a *restoration of validated code*, not an invention; it simultaneously closes open items #1 and #3. Caution: on hard wide-pose scenes at **zero** offset InsertTuner seated only **1–2/10** SFP, failing **at the mouth (45.8–46.3 mm — our exact 46 mm)**; SFP entrance→seat funnel is **45.8 mm** (SC's is 15.6 mm). Those failures were blamed on *"commanded-pose/wrist-configuration geometry"* — **the same posture bug SAFE-CLEAR just fixed**, so the stack may have been handicapped by it.
+- **SEAT RESTORATION (InsertTuner force stack) — NET REGRESSION; and the spiral STILL never ran (2026-07-10).** → branch `seat-restore-v1` (**NOT merged**). `PerceptionInsertSFPSeat`.
+  - **WHAT WAS RESTORED:** `F_STOP` **8.0 → 4.0** · **stall detection** re-added · **RCC compliance `STIFF_CONTACT=[40,40,90]`** (lateral SOFT / axial FIRM) + `SOFT_MARGIN` proximity switch · `RETRACT` 6 mm + `CLEAR_WAIT` · `Z_MIN` cap · entrance-aware seat test. `entrance_h` from **CAD (SFP 45.8 mm — GT-free)**; InsertTuner had read it from a GT frame.
+  - **⚠️ RESULT — WORSE THAN BASELINE ON AVERAGE. Seat rate 1/4.**
+
+    | run | SFP port_0 | SFP port_1 | total |
+    |---|---|---|---|
+    | `sfp_seat` | Partial 0.04 m | ✅ **"Cable insertion successful"** (tier_3 **75**) | **132.2** ← the ONE seat |
+    | `sfp_seat_v1` | No insertion | No insertion | 68.0 |
+    | `sfp_seat_v2` | No insertion | No insertion | 88.6 |
+    | `sfp_seat_viz` | Partial 0.04 m | No insertion | 54.6 |
+    | | | **MEAN** | **85.9** |
+    | **baseline `sfp_free`** (stiff) | Partial **38** | Partial **38** | **92.2** *(reliable, never seats)* |
+
+  - **WHY IT REGRESSES:** compliance trades a **guaranteed partial (38)** for a **~25 % shot at a full seat (75)**. When it misses, the laterally-soft plug **drifts off the port** and scores *"No insertion" (~25)* instead of resting on it for the partial. EV ≈ 41/trial vs the baseline's reliable 38 — **not worth the variance.**
+  - **⚠️ MY BUG — THE SPIRAL STILL NEVER RAN.** Every run logs `SEAT outcome: floor (spiral 0)`. `z_ref`/`tip_z_ref` are anchored at the **DESCENT START (200 mm up)**, so `(tip_z_ref − tip_z)` ≈ 190 mm and the `< 4 mm` stall test **can never be true**. **InsertTuner escapes this because its Phase C begins only 10 mm above the entrance** (after a servoed glide) — its reference is **LOCAL**. Starting the same loop from 200 mm invalidates it. ⇒ **the one seat was PURE COMPLIANCE LUCK, not the force stack working. The search has STILL never executed in the closed loop.**
+  - **FIRST GT-FREE FULL SEAT did happen** (`sfp_seat` trial_2, tier_3 **75**) ⇒ **compliance CAN absorb a 2–3 mm error** — it is just a coin-flip at that offset. **No video of it exists:** the only recorded run (`sfp_seat_viz`) is one where port_1 FAILED — and the recording *itself* (PNG encode+write inside the 50 ms control loop) stalls the descent and costs the seat (**132.2 → 54.6 on identical code**). Viz since fixed to JPEG→RAM + post-trial flush.
+  - **WHY port_0 FAILS AND port_1 SEATS** — approach GEOMETRY, not perception (both locks 2–3 mm from GT) and not the seat code (identical): from the same SAFE-CLEAR pose, **port_0 needs +113 mm in y (OUTWARD) and 519 mm reach; port_1 needs −72 mm (INWARD) and 464 mm.** The approach **descends while translating**, so port_0's longer outward sweep drags the upper arm across the NIC card (−24 contact, 86 N grind). ⇒ **option A (two-segment path) is the fix.**
+  - **CORRECTIONS to earlier claims in this log:** (1) *"lateral search is the wrong lever"* — established only under **STIFF** gains; **untested under compliance** (all 4 probe variants ran at `[90,90,90]`, i.e. dragging a RIGID plug). (2) *"the intended mechanism is a feed-forward downward push"* — **WRONG**: `set_pose_target` hardcodes `feedforward_wrench_at_tip = 0`, and **InsertTuner never used one** — its validated 277.7 config is **compliance + position descent**, no feed-forward.
+  - **NEXT:** fix the stall detector (**rolling window**, or replicate InsertTuner's glide so contact detection begins near the mouth) → the spiral finally gets a chance → **re-test WITH REPETITIONS**. *(M9 already warned "run-to-run variance is real; sweeps need repetitions" — single runs were reported as results twice today and were wrong both times.)* Prefer **option A first**: a deterministic path fix with no variance gamble.
 
 ---
 
@@ -155,6 +174,11 @@ GT ceiling ~279 → GT-port perception 227.8 → every fully-GT-free perception 
 | **40.1** | 07-09 | **geo_v1** | first GT-free closed-loop (CAD-z depth fix; beat +1.4 floor, reversed −51) — *superseded by sfp_free* |
 | 37.5 | 07-02 | wavearm | floor |
 | — | — | *— force-insert probe experiments (branch `force-insert-v2`, ALL WORSE than 92.2, not merged) —* | |
+| — | — | *— seat restoration (branch `seat-restore-v1`, InsertTuner force stack; MEAN 85.9 < baseline 92.2, NOT merged) —* | |
+| 132.2 | 07-10 | **sfp_seat** | ⚠️ **OUTLIER** — the ONE run that seated (SFP port_1 tier_3 **75**, first GT-free full seat). Does NOT reproduce. |
+| 88.6 | 07-10 | sfp_seat_v2 | repeat — no seat |
+| 68.0 | 07-10 | sfp_seat_v1 | repeat — no seat |
+| 54.6 | 07-10 | sfp_seat_viz | recording run — PNG writes in the 50 ms control loop stall the descent, killing the seat |
 | 79.2 | 07-10 | sfp_m_slide | compliant sliding spiral (valid; sign-inverted bias) |
 | 71.1 | 07-10 | sfp_m_fermat | Fermat r∝√k probes — **INVALID** (stall false-fire burned the budget) |
 | 58.6 | 07-10 | sfp_m_raster | dense grid probes — **INVALID** (same bug) |
