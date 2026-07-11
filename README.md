@@ -1,3 +1,116 @@
+# 🏆 OUR SOLUTION — GT-free cable insertion
+
+> **Best GT-free score: `92.2 / 300`** — policy **`PerceptionInsertSFPDrive`** (2.3× the previous best of 40.1).
+> This section tracks **our own solution**; the challenge's upstream toolkit guide follows below.
+
+```bash
+# run the best GT-free policy (no ground truth anywhere)
+~/ws_aic/aic_local/score.sh aic_example_policies.ros.PerceptionInsertSFPDrive false eval my_run
+```
+
+## Scoreboard
+
+| run | score | ground truth? | note |
+|---|---|---|---|
+| CheatCode | 279.4 | ✅ GT | oracle ceiling (no force stack — pure position control) |
+| InsertTuner (M9) | 277.7 | ✅ GT | our force rig, 3/3, tug-verified |
+| `kp_gtport` | 227.8 | ✅ GT port | proven perception ceiling |
+| **`sfp_reach_gt`** | **171.4** | ✅ GT port | **our motion + our force stack — both SFP FULL SEAT** ⇒ motion is solved |
+| **`sfp_free`** | **92.2** | ❌ **none** | ⭐ **BEST GT-FREE — the number we claim** |
+| `geo_v1` | 40.1 | ❌ none | previous best (superseded) |
+| WaveArm | 37.5 | ❌ none | challenge floor (no insertion) |
+| ACT (pretrained) | −21 | ❌ none | shipped learned baseline |
+
+**Per-trial (`sfp_free`, GT-free):**
+
+| trial | our lock vs GT | tier-3 | result |
+|---|---|---|---|
+| SFP `port_0` | **~2 mm** | 38.0 | partial 0.05 m (+ −36 approach penalty) |
+| SFP `port_1` | **~3 mm** | 38.0 | partial 0.05 m · **zero contacts** |
+| SC | 58 mm ❌ | 17.4 | no insert (perception bug) |
+
+🎥 **GT-free insert videos** (green X = our perceived lock driving the arm; white ring = GT, reference only):
+[`sfp_trial1_gtfree.mp4`](aic_data/sfp_free_viz/sfp_trial1_gtfree.mp4) · [`sfp_trial2_gtfree.mp4`](aic_data/sfp_free_viz/sfp_trial2_gtfree.mp4)
+
+---
+
+## The stack — 3 levels
+
+```
+[0] SWEEP  13 wrist poses x 3 cams
+     |
+[1] DETECTION ....... board pose + port lock          ✅ = GT quality (<=3 mm, 0.00 deg)
+     |
+[2] MOTION .......... SAFE-CLEAR + approach + descend ✅ SOLVED (both SFP full-seat w/ GT)
+     |
+[3] SEAT ............ force stack                     ❌ BROKEN — has never run (see below)
+```
+
+### LEVEL 1 — DETECTION ✅
+| piece | what it does | file |
+|---|---|---|
+| **Board pose** | full-scale mask → largest-CC (drop detached NIC blob) → **known-size box yaw** → **magenta-anchored center**. vs GT: **≤1.3° / ≤6.9 mm** on eval poses | `PerceptionInsertSFP.py` |
+| **SFP slide-select** | the 2 SFP openings are 21.8 mm apart; both-visible frames estimate the rail slide → identity fixed → picks the **named** opening | `PerceptionInsertSFP.py` |
+| **YOLO port detector** | candidate generator (fine-tuned; sharp close, 0–1 mm) | `PerceptionInsertYOLO.py` |
+| **CAD-z back-projection** | port depth from the known board plane (replaced broken triangulation) | `PerceptionInsertGeo.py` |
+| **FK plug** | plug pose = `FK(gripper) · T_grasp[type]` — **zero vision** | `PerceptionInsertYOLO.py` |
+| **Magenta quadrant** | resolves the 90° board ambiguity — 12/12 | `PerceptionInsertGeo.py` |
+
+### LEVEL 2 — MOTION ✅ (the big win)
+| piece | what it does | file |
+|---|---|---|
+| **`_safe_clear`** ⭐ | **THE FIX.** Between sweep and approach, drive **joint-space** to `SAFE_HOME` to **reset the IK branch**. The sweep-end *posture* made IK fold the upper arm into the NIC card — Cartesian commands can't fix this (the bad posture *satisfies* the pose). **Also cured the long-standing SC ~53 cm stall.** | `PerceptionInsertSFPDrive.py` |
+| **Frozen target** | perceive once during the sweep, then hold (no per-step re-perception drift) | `PerceptionInsertSFPDrive.py` |
+| Approach + descent | 100-step slerp/position interp → hover → slow straight descent | `PerceptionInsertYOLO.py` |
+
+### LEVEL 3 — SEAT ❌ **BROKEN — the #1 open item**
+The deployed force stack is a **degraded port of `InsertTuner`** (our rig validated at **277.7**) and **has never actually run**:
+
+| | InsertTuner (validated) | Deployed (broken) |
+|---|---|---|
+| `F_STOP` | **4.0 N** — *"impedance can only make ~5–6 N at the mouth"* | **8.0 N** ← **unreachable** |
+| stall detect | `df > F_STOP **or stalled**` | **GONE** |
+| RCC compliance | `[40, 40, 90]` lateral-soft / axial-firm | **GONE** (falls back to stiff `[90,90,90]`) |
+
+**Consequence:** contact is only tested as a force *increase*, but the plug landing on the SFP cage face **unloads** the wrist (20.9 → 8 N). **Zero spiral log lines in any run, ever.** The "partial insertion 0.05 m" is really **the plug resting on the cage face**, never searching. GT seats because an exact target slides straight in and never touches the face.
+
+---
+
+## Open items (ranked)
+
+| # | fix | gain | risk |
+|---|---|---|---|
+| **A** | **Two-segment approach** — hold altitude while translating, *then* straight down. (Today it descends **diagonally while translating** into the card: TCP z 0.328→0.271 during the lateral move.) **Rule: no simultaneous lateral translation + descent near the card.** | **+36** → ~128 | low |
+| **B** | **Restore the real force stack** — `F_STOP` 4.0, stall detect, RCC compliance. *A restoration of validated code, not an invention.* Do **after A**: `F_STOP=4.0` is sensitive enough that trial-0's 93 N card scraping would false-trigger the search. | **+74** → ~166 | medium — capture basin at 2–3 mm **never measured** |
+| **C** | **Fix the SC port lock** (58 mm off; offline was 6/6 ≤1 mm ⇒ findable bug) | +20…40 | low |
+| ~~D~~ | sub-mm perception | +74 | slow, uncertain |
+| ~~E~~ | continuous re-lock | 0 | solves a problem we don't have (target is static **and** correct) |
+
+**Do NOT retry:** lateral probe-pattern search (fermat / raster / dense grid / sliding spiral). All 4 scored **worse** than 92.2 — searching *drags the plug off* the spot that at least scores a partial. → `force-insert-v2` branch, LAB_LOG.
+
+---
+
+## Code map (our files)
+
+```
+aic_example_policies/aic_example_policies/ros/
+  PerceptionInsertSFPDrive.py   ⭐ BEST GT-FREE (92.2) — safe-clear + frozen target
+  PerceptionInsertSFP.py           board-pose fix + SFP slide-select
+  PerceptionInsertGeo.py           CAD-z depth + magenta quadrant
+  PerceptionInsertYOLO.py          YOLO detector + FK plug + approach/descent + (broken) force stack
+  PerceptionInsertKP.py            keypoint variant (earlier)
+  SFPDriveViz.py                   GT-free insert video (X = our lock)
+  SweepDump{,Full,Val}.py          frame/TF dumpers for offline eval
+  CheatViz*/CheatLog*.py           diagnostics (YOLO-vs-range, slide-select videos)
+  Geo{Home,RealPlug,ReplayA}.py    execution forensics (all superseded by safe-clear)
+aic_engine/config/val_config.yaml  held-out 12-scene validation set
+```
+
+**Docs:** [LAB_LOG.md](LAB_LOG.md) (experiment index) · [pipeline.md](pipeline.md) (gates) · [board_pose.md](board_pose.md) (board fix) · [notes/](notes/)
+
+---
+---
+
 # AI for Industry Challenge Toolkit
 
 [![build](https://github.com/intrinsic-dev/aic/actions/workflows/build.yml/badge.svg)](https://github.com/intrinsic-dev/aic/actions/workflows/build.yml)
