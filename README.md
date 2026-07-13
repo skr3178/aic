@@ -30,7 +30,36 @@
 | SC | 58 mm ❌ | 17.4 | no insert (perception bug) |
 
 🎥 **GT-free insert videos** (green X = our perceived lock driving the arm; white ring = GT, reference only):
-[`sfp_trial1_gtfree.mp4`](aic_data/sfp_free_viz/sfp_trial1_gtfree.mp4) · [`sfp_trial2_gtfree.mp4`](aic_data/sfp_free_viz/sfp_trial2_gtfree.mp4)
+[`sfp_trial1_gtfree.mp4`](media/videos/sfp_trial1_gtfree.mp4) · [`sfp_trial2_gtfree.mp4`](media/videos/sfp_trial2_gtfree.mp4)
+
+### 🔌 GT-free FULL SEAT — SFP `port_0` (branch `seat-v2`)
+
+![GT-free SFP port_0 full seat](media/videos/seat_v2_sfp_port0_seated.gif)
+
+*Fully GT-free control (2× speed).* The **green X** is our *perceived* lock — it is what drives the arm; the white ring is GT, **drawn for reference only, never read**. The HUD shows the seat happening: `lock err 3 mm` → `CONTACT: force_abs` → stiffness drops to `[40,40,90] RCC-SOFT` (lateral-soft, so the plug can self-align) → `tip −1.0 mm above port` = **below the port datum ⇒ seated**, scored `tier_3 = 75 "Cable insertion successful"`.
+
+This is the **revived force stack** (branch `seat-v2`): the deployed contact predicate required a force *increase*, but landing on the SFP cage face **unloads** the wrist (21 N → 8 N), so the branch had **never fired in any SFP run, ever** — the "force stack" was silently a stiff straight-down ramp. A sign-insensitive trigger + re-arming stall watchdog + RCC compliance makes the search actually run. ⚠️ **Not yet banked as a score:** on an identical config the total swings **67.8 → 160.8**, so the headline above remains the reproducible **92.2**. See [LAB_LOG.md](LAB_LOG.md).
+
+### 🔒 SC — perception FIXED (58 mm → 2 mm), but the plug is mechanically BLOCKED
+
+🎥 [`sc_trial_gtfree_blocked.mp4`](media/videos/sc_trial_gtfree_blocked.mp4) — same HUD format as the SFP videos.
+
+**The perception bug is solved.** The eval's SC trial spawns **three** SC modules, and the old lock took a robust median over *every* `sc` detection on the board — averaging across all three and landing **58 mm** from the true port. SFP had a target-selection gate; SC never got one. Adding the same idea — a **board-Y module gate** ([`PerceptionInsertSCFix.py`](aic_example_policies/aic_example_policies/ros/PerceptionInsertSCFix.py)) — takes the lock to **2 mm**.
+
+**But SC still does not seat, and it is no longer a perception problem.** The plug tracks the port to within **0.1–0.4 mm laterally through the entire 150 mm descent**, then hits a hard stop **18.0 mm above the port datum** — at **0.1 mm lateral error**:
+
+| step | z cmd | tip above port | tip lateral | ΔF | spiral k |
+|---|---|---|---|---|---|
+| 273 | 0.0635 | 37.1 mm | **0.1 mm** | −0.4 | 0 |
+| 301 | 0.0495 | 20.5 mm | **0.1 mm** | −0.4 | 0 |
+| **317** | 0.0155 | **18.5 mm** | **0.2 mm** | **−8.4** | 1 | ← **hard stop** |
+| 421 | −0.0140 | 18.7 mm | 2.7 mm | −12.0 | 5 |
+
+We command `z` **33 mm past the block** and the plug moves **0.4 mm**. `ΔF −12 N` means the wrist is being *unloaded* — the plug's weight is resting on something solid. This rules out perception, the trigger, *and* the search: the spiral only makes it worse, dragging a perfectly-centred plug from 0.1 mm out to 2.7 mm.
+
+Two open candidates:
+1. **Not enough axial force.** `AX_STIFF = 90 N/m` × 33 mm overtravel ≈ **3 N total**. InsertTuner's own note says *"impedance can only make ~5–6 N at the mouth"* — enough for SFP's 46 mm funnel, likely not for SC's 15.6 mm one.
+2. **A ~2.4 mm z-datum error.** The plug stops at 18.0 mm; SC's funnel entrance is at 15.6 mm — it halts *2.4 mm short of even reaching the funnel mouth*, consistent with `CAD_Z["sc"]` or the plug-tip FK offset being off by that much.
 
 ---
 
